@@ -1,0 +1,6 @@
+node_modules
+.idea/*
+!.idea/inspectionProfiles/
+!.idea/jsLinters/
+!.idea/codeStyleSettings.xml
+build/

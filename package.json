@@ -1,0 +1,46 @@
+{
+  "name": "OneWay",
+  "version": "0.0.0",
+  "description": "Demo project for Angular One Way idea",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Efremov",
+  "license": "",
+  "dependencies": {
+    "angular": "^1.4.9",
+    "ramda": "^0.19.0",
+    "randomatic": "^1.1.5"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.0",
+    "babel-core": "^6.3.26",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-runtime": "^6.3.19",
+    "del": "^2.2.0",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^5.0.1",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-protractor": "^2.1.0",
+    "gulp-slm": "^1.0.5",
+    "html-loader": "^0.4.0",
+    "jasmine": "^2.4.1",
+    "jscs": "^2.10.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.7",
+    "karma-sourcemap-loader": "^0.3.7",
+    "minimist": "^1.2.0",
+    "ng-annotate-loader": "^0.1.0",
+    "nodemon": "^1.8.1",
+    "protractor": "^3.1.0",
+    "slm-loader": "^0.1.1",
+    "webpack": "^1.12.9"
+  }
+}
