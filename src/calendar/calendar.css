@@ -1,0 +1,74 @@
+.calendar {
+  background-color: #fff;
+  min-height: 256px;
+}
+
+.calendar__week-days {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.calendar__week-days th {
+  padding: 8px 0;
+  text-align: center;
+}
+
+.calendar__body {
+  font-size: 12px;
+}
+
+.calendar__month-name {
+  font-size: 12px;
+  padding: 7px 0;
+}
+
+.calendar__month {
+  table-layout: fixed;
+  width: 175px;
+  margin: 5px 50px;
+  border-spacing: 0 5px;
+}
+
+.calendar__previous, .calendar__next {
+  position: absolute;
+  top: 50%;
+  margin-top: -13px;
+}
+
+.calendar__previous { left: 13px; }
+.calendar__next { right: 13px; }
+
+.calendar__day {
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 20px;
+  padding: 4px 0;
+  margin: 2px 0 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar__day:hover { box-shadow: inset 0 0 0 1px #edeff2; /* TODO ask spirik */ }
+
+.calendar__day--other-month {
+  pointer-events: none;
+  color: #a2aab2;
+  cursor: none;
+}
+
+.calendar__day--selected { background: #edeff2; }
+.calendar__day--selected:hover { background: #f6f8f9; }
+
+.calendar__day--today { color: #ff7676; }
+.calendar__day--today:after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  margin: 0 0 0 -2px;
+  background: #ff7676;
+  border-radius: 50%;
+  display: block;
+  width: 4px;
+  height: 4px;
+}

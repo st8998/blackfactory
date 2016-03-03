@@ -2,8 +2,30 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title One Way TODO
+    title Markup
     script src="./main.js"
 
-  body ng-app="todo"
-    todo-list
+  body ng-app="markup"
+    section
+      h2 Dropdown
+      div
+        .dropdown[ dropdown ]
+          span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+          .dropdown__body.dropdown__body--white
+            h1 ONE
+
+            .dropdown[ dropdown ]
+              span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+              .dropdown__body.dropdown__body--white
+                h2 TWO
+
+                .dropdown[ dropdown ]
+                  span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+                  .dropdown__body.dropdown__body--white
+                    h3 THREE
+    section
+      h2 Dropdown calendar
+      .dropdown[ dropdown dropdown--open="true" ]
+        span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+        .dropdown__body.dropdown__body--white
+          calendar

@@ -10,6 +10,28 @@ const karma = require('karma')
 const connect = require('gulp-connect')
 const childProcess = require('child_process')
 
+const postcss = require('gulp-postcss')
+const autoprefixer = require('autoprefixer')
+const autoreset = require('postcss-autoreset')
+const cssnext = require('postcss-cssnext')
+const postcssSVG = require('postcss-inline-svg')
+
+// CSS
+gulp.task('css', function () {
+  const processors = [
+    autoprefixer({ browsers: ['last 1 version'] }),
+    // autoreset({ rulesMatcher: 'bem' }),
+    cssnext(),
+  ]
+  return gulp.src('./src/**/*.css')
+    .pipe(postcss(processors))
+    .pipe(gulp.dest('./build'))
+})
+
+gulp.task('css-watch', ['css'], function () {
+  gulp.watch('./src/**/*.css', ['css'])
+})
+
 // SLIM
 gulp.task('slim', function () {
   gulp.src('./src/*.slim')
@@ -35,6 +57,10 @@ const config = {
       { loader: 'ng-annotate', test: /\.js$/, exclude: /node_modules/ },
       { loaders: ['html', 'slm'], test: /\.(slm|slim)$/, exclude: /node_modules/ },
       {
+        loader: 'style-loader!css-loader!postcss-loader',
+        test: /\.css$/,
+      },
+      {
         loader: 'babel-loader',
         test: /\.js$/, exclude: /node_modules/,
         query: {
@@ -42,12 +68,29 @@ const config = {
           presets: ['stage-0', 'es2015'],
         },
       },
+      {
+        test: /jquery\.js$/,
+        loader: 'expose?jQuery',
+      },
     ],
   },
   plugins: [],
   resolve: {
     extensions: ['', '.js'],
     modulesDirectories: ['./src', './tests', 'node_modules'],
+  },
+  postcss: function () {
+    return [
+      cssnext(),
+      postcssSVG({ path: './src' }),
+      autoreset({
+        reset: {
+          margin: 0,
+          padding: 0,
+          'box-sizing': 'border-box',
+        },
+      }),
+    ]
   },
 }
 
