@@ -22,10 +22,10 @@ html
                 .dropdown[ dropdown ]
                   span.button.button--calendar.dropdown__action-button title="Select date" role="link"
                   .dropdown__body.dropdown__body--white
-                    h3 THREE
+                    calendar ng-model="date1"
     section
-      h2 Dropdown calendar
-      .dropdown[ dropdown dropdown--open="true" ]
+      h2 Dropdown calendar {{date1 | date:'dd-MM-yyyy'}}
+      .dropdown[ dropdown dropdown--open="open" ]
         span.button.button--calendar.dropdown__action-button title="Select date" role="link"
         .dropdown__body.dropdown__body--white
-          calendar
+          calendar ng-model="date1" marker="1"

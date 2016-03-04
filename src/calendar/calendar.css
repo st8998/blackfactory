@@ -48,7 +48,7 @@
   position: relative;
 }
 
-.calendar__day:hover { box-shadow: inset 0 0 0 1px #edeff2; /* TODO ask spirik */ }
+.calendar__day:hover { box-shadow: inset 0 0 0 1px #edeff2; }
 
 .calendar__day--other-month {
   pointer-events: none;
