@@ -9,4 +9,8 @@ import { default as registerDropdown } from 'dropdown/dropdown'
 angular.module('markup', [])
   ::registerCalendar()
   ::registerDropdown()
-
+  .run(function ($rootScope) {
+    $rootScope.$watch(function () {
+      console.log('ROOT DIGEST')
+    })
+  })
