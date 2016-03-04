@@ -3,10 +3,12 @@ import 'calendar/calendar.css'
 
 import tmpl from 'calendar/calendar_tmpl.slim'
 
-import { map, splitEvery, compose } from 'ramda'
-import instadate from 'instadate'
-import { h, diff, patch, create as createElement } from 'virtual-dom'
 import zone from 'zone'
+
+import { map, splitEvery, compose } from 'ramda'
+import { noon, isSameDay } from 'instadate'
+import { h, diff, patch, create as createElement } from 'virtual-dom'
+import { nextMonth, prevMonth, extendedMonthDays } from 'misc/dates'
 
 export default function register() {
   return this.directive('calendar', /* @ngInject */ function ($filter) {
@@ -19,24 +21,10 @@ export default function register() {
       link(scope, el, attrs, [ngModel]) {
         const format = $filter('date')
 
-        const today = instadate.noon(new Date())
-        let month = instadate.noon(new Date())
+        const today = noon(new Date())
+        let month = noon(new Date())
         let selected = undefined
         let setDate
-
-        function dates(date) {
-          let start = instadate.firstDateInMonth(date)
-          if (start.getDay() !== 0) {
-            start = instadate.addDays(start, -start.getDay())
-          }
-
-          let end = instadate.lastDateInMonth(date)
-          if (end.getDay() !== 7) {
-            end = instadate.addDays(end, 6 - end.getDay())
-          }
-
-          return instadate.dates(start, end)
-        }
 
         const datesNodes = map(function (date) {
           const currMonth = month.getMonth()
@@ -46,15 +34,12 @@ export default function register() {
           if (date.getMonth() !== currMonth) {
             className += ' calendar__day--other-month'
           } else {
-            if (instadate.isSameDay(date, today)) className += ' calendar__day--today'
+            if (isSameDay(date, today)) className += ' calendar__day--today'
 
-            if (instadate.isSameDay(date, selected)) className += ' calendar__day--selected'
+            if (isSameDay(date, selected)) className += ' calendar__day--selected'
           }
 
-          return h('td', {
-            className, key: instadate.isoDateString(date),
-            onclick: setDate.bind(this, date),
-          }, date.getDate())
+          return h('td', { className, onclick: setDate.bind(this, date) }, date.getDate())
         })
 
         const rowNodes = compose(
@@ -80,11 +65,11 @@ export default function register() {
 
         const calendarZone = zone.fork({
           afterTask() {
-            const newTree = buildCalendarTree(dates(month))
+            const newTree = buildCalendarTree(extendedMonthDays(month))
             const patches = diff(calendarTree, newTree)
             calendarNode = patch(calendarNode, patches)
             calendarTree = newTree
-          },
+          }
         })
 
         ngModel.$render = calendarZone.bind(function () {
@@ -98,20 +83,20 @@ export default function register() {
             ngModel.$setViewValue(date)
           }
 
-          calendarTree = buildCalendarTree(dates(today))
+          calendarTree = buildCalendarTree(extendedMonthDays(today))
           calendarNode = createElement(calendarTree)
 
           el.find('.calendar__month--placeholder').replaceWith(calendarNode)
 
           el.on('click', '.calendar__next', function () {
-            month = instadate.addDays(instadate.lastDateInMonth(month), 2)
+            month = nextMonth(month)
           })
 
           el.on('click', '.calendar__previous', function () {
-            month = instadate.addDays(instadate.firstDateInMonth(month), -2)
+            month = prevMonth(month)
           })
         })
-      },
+      }
     }
   })
 }
