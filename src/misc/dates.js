@@ -21,3 +21,7 @@ export function prevMonth(_month) {
   const month = new Date(_month)
   return firstDateInMonth(addDays(firstDateInMonth(month), -1))
 }
+
+export function format() {
+  throw new Error('Not implemented')
+}

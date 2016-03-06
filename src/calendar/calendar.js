@@ -5,13 +5,57 @@ import tmpl from 'calendar/calendar_tmpl.slim'
 
 import zone from 'zone'
 
-import { map, splitEvery, compose } from 'ramda'
-import { noon, isSameDay } from 'instadate'
+import { map, splitEvery, compose, merge } from 'ramda'
+import { noon, isSameDay, isDayBetween } from 'instadate'
 import { h, diff, patch, create as createElement } from 'virtual-dom'
-import { nextMonth, prevMonth, extendedMonthDays } from 'misc/dates'
+import { nextMonth, prevMonth, extendedMonthDays, format } from 'misc/dates'
+
+export function buildCalendarTree(month, { start, end }, dayEvents) {
+  const today = noon(new Date())
+  const currMonth = month.getMonth()
+
+  const dayNodes = map(function (day) {
+    const bindEvents = map(function (onEvent) {
+      return onEvent.bind(this, day)
+    })
+
+    let className = 'calendar__day'
+
+    if (day.getMonth() !== currMonth) {
+      className += ' calendar__day--other-month'
+    } else {
+      if (isSameDay(day, today)) className += ' calendar__day--today'
+
+      if (start && isSameDay(day, start)) className += ' calendar__day--selected calendar__day--selected-start'
+      if (end && isSameDay(day, end)) className += ' calendar__day--selected calendar__day--selected-end'
+      if (start && end && isDayBetween(day, start, end)) className += ' calendar__day--selected'
+    }
+
+    return h('td', merge({ className }, bindEvents(dayEvents)), day.getDate())
+  })
+
+  const monthTable = function (weekRows) {
+    return h('table.calendar__month', [
+      h('thead.calendar__head', [
+        h('tr', h('th.calendar__month-name', { attributes: { colspan: 7 } }, format(month, 'MMM yyyy'))),
+        h('tr.calendar__week-days',
+          [h('th', 'Mo'), h('th', 'Tu'), h('th', 'We'), h('th', 'Th'),
+            h('th', 'Fr'), h('th', 'Sa'), h('th', 'Su')]),
+      ]),
+      h('tbody.calendar__body', weekRows),
+    ])
+  }
+
+  return compose(
+    monthTable,
+    map(nodes => h('tr', nodes)),
+    splitEvery(7),
+    dayNodes,
+  )(extendedMonthDays(month))
+}
 
 export default function register() {
-  return this.directive('calendar', /* @ngInject */ function ($filter) {
+  return this.directive('calendar', /* @ngInject */ function () {
     return {
       restrict: 'E',
       template: tmpl,
@@ -19,53 +63,16 @@ export default function register() {
       require: ['ngModel'],
 
       link(scope, el, attrs, [ngModel]) {
-        const format = $filter('date')
-
-        const today = noon(new Date())
         let month = noon(new Date())
-        let selected = undefined
-        let setDate
-
-        const datesNodes = map(function (date) {
-          const currMonth = month.getMonth()
-
-          let className = 'calendar__day'
-
-          if (date.getMonth() !== currMonth) {
-            className += ' calendar__day--other-month'
-          } else {
-            if (isSameDay(date, today)) className += ' calendar__day--today'
-
-            if (isSameDay(date, selected)) className += ' calendar__day--selected'
-          }
-
-          return h('td', { className, onclick: setDate.bind(this, date) }, date.getDate())
-        })
-
-        const rowNodes = compose(
-          map(nodes => h('tr', nodes)),
-          splitEvery(7),
-          datesNodes,
-        )
-
-        function buildCalendarTree(dates) {
-          return h('table.calendar__month', [
-            h('thead.calendar__head', [
-              h('tr', h('th.calendar__month-name', { attributes: { colspan: 7 } }, format(month, 'MMM yyyy'))),
-              h('tr.calendar__week-days',
-                [h('th', 'Mo'), h('th', 'Tu'), h('th', 'We'), h('th', 'Th'),
-                  h('th', 'Fr'), h('th', 'Sa'), h('th', 'Su')]),
-            ]),
-            h('tbody.calendar__body', rowNodes(dates)),
-          ])
-        }
+        let selected = {}
+        let setSelected
 
         let calendarTree
         let calendarNode
 
         const calendarZone = zone.fork({
           afterTask() {
-            const newTree = buildCalendarTree(extendedMonthDays(month))
+            const newTree = buildCalendarTree(month, selected, { onclick: setSelected })
             const patches = diff(calendarTree, newTree)
             calendarNode = patch(calendarNode, patches)
             calendarTree = newTree
@@ -73,17 +80,17 @@ export default function register() {
         })
 
         ngModel.$render = calendarZone.bind(function () {
-          selected = ngModel.$viewValue
+          selected = { start: ngModel.$viewValue, end: ngModel.$viewValue }
         })
 
         calendarZone.run(function () {
           // ngModel integration
-          setDate = function (date) {
-            selected = date
+          setSelected = function (date) {
+            selected = { start: date, end: date }
             ngModel.$setViewValue(date)
           }
 
-          calendarTree = buildCalendarTree(extendedMonthDays(today))
+          calendarTree = buildCalendarTree(month, selected, { onclick: setSelected })
           calendarNode = createElement(calendarTree)
 
           el.find('.calendar__month--placeholder').replaceWith(calendarNode)

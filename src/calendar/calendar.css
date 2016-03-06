@@ -41,14 +41,16 @@
 .calendar__day {
   vertical-align: middle;
   text-align: center;
-  border-radius: 20px;
   padding: 4px 0;
   margin: 2px 0 4px;
   cursor: pointer;
   position: relative;
 }
 
-.calendar__day:hover { box-shadow: inset 0 0 0 1px #edeff2; }
+.calendar__day:hover {
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px #edeff2;
+}
 
 .calendar__day--other-month {
   pointer-events: none;
@@ -57,7 +59,18 @@
 }
 
 .calendar__day--selected { background: #edeff2; }
-.calendar__day--selected:hover { background: #f6f8f9; }
+.calendar__day--selected:hover {
+  background: #f6f8f9;
+  border-radius: 0;
+}
+.calendar__day--selected-start, .calendar__day--selected-start:hover {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.calendar__day--selected-end, .calendar__day--selected-end:hover {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 
 .calendar__day--today { color: #ff7676; }
 .calendar__day--today:after {
