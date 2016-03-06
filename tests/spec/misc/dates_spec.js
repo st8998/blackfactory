@@ -5,8 +5,16 @@ describe('dates', function () {
     expect(nextMonth('2000-01-11')).toHaveSameDay('2000-02-01')
   })
 
+  it('#nextMonth sets first date of 2 next month', function () {
+    expect(nextMonth('2000-01-11', 2)).toHaveSameDay('2000-03-01')
+  })
+
   it('#prevMonth sets first date of prev month', function () {
     expect(prevMonth('2000-03-29')).toHaveSameDay('2000-02-01')
+  })
+
+  it('#prevMonth sets first date of 3 prev month', function () {
+    expect(prevMonth('2000-03-29', 3)).toHaveSameDay('1999-12-01')
   })
 
   it('#extendedMonthDays returns month days extended to full weeks for march 2016', function () {

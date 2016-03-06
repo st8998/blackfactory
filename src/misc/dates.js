@@ -12,14 +12,14 @@ export function extendedMonthDays(_month) {
   return dates(start, end)
 }
 
-export function nextMonth(_month) {
-  const month = new Date(_month)
-  return addDays(lastDateInMonth(month), 1)
+export function nextMonth(_month, monthsToSkip = 1) {
+  return monthsToSkip === 0 ? _month :
+    nextMonth(addDays(lastDateInMonth(new Date(_month)), 1), monthsToSkip - 1)
 }
 
-export function prevMonth(_month) {
-  const month = new Date(_month)
-  return firstDateInMonth(addDays(firstDateInMonth(month), -1))
+export function prevMonth(_month, monthsToSkip = 1) {
+  return monthsToSkip === 0 ? _month :
+    prevMonth(firstDateInMonth(addDays(firstDateInMonth(new Date(_month)), -1)), monthsToSkip - 1)
 }
 
 export function format() {
