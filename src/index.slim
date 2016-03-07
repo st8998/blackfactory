@@ -25,7 +25,14 @@ html
                     calendar ng-model="date1"
     section
       h2 Dropdown calendar {{date1 | date:'dd-MM-yyyy'}}
+      .dropdown[ dropdown ]
+        span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+        .dropdown__body.dropdown__body--white
+          calendar ng-model="range.start"
+
+    section
+      h2 Dropdown range calendar {{range.start | date:'dd-MM-yyyy'}} -  {{range.end | date:'dd-MM-yyyy'}}
       .dropdown[ dropdown dropdown--open="open" ]
         span.button.button--calendar.dropdown__action-button title="Select date" role="link"
         .dropdown__body.dropdown__body--white
-          calendar ng-model="date1" marker="1"
+          range-calendar ng-model="range" marker="1"

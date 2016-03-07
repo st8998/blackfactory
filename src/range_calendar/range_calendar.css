@@ -1,0 +1,16 @@
+.range-calendar {
+  padding: 5px 30px;
+}
+
+.range-calendar--selecting .calendar__day--selected {
+  background: #f6f8f9;
+}
+
+.range-calendar__months {
+  width: 645px;
+  min-height: 256px;
+}
+
+.calendar__month {
+  margin: 0 20px;
+}

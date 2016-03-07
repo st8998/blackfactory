@@ -1,6 +1,7 @@
 .calendar {
   background-color: #fff;
-  min-height: 256px;
+  min-height: 266px;
+  padding: 5px 50px;
 }
 
 .calendar__week-days {
@@ -25,8 +26,8 @@
 .calendar__month {
   table-layout: fixed;
   width: 175px;
-  margin: 5px 50px;
   border-spacing: 0 5px;
+  float: left;
 }
 
 .calendar__previous, .calendar__next {

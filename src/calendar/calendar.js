@@ -6,7 +6,7 @@ import tmpl from 'calendar/calendar_tmpl.slim'
 import zone from 'zone'
 
 import { map, splitEvery, compose, merge } from 'ramda'
-import { noon, isSameDay, isDayBetween } from 'instadate'
+import { noon, isSameDay, isDayBetween, isoDateString } from 'instadate'
 import { h, diff, patch, create as createElement } from 'virtual-dom'
 import { nextMonth, prevMonth, extendedMonthDays, format } from 'misc/dates'
 
@@ -35,7 +35,7 @@ export function buildCalendarTree(month, { start, end }, dayEvents) {
   })
 
   const monthTable = function (weekRows) {
-    return h('table.calendar__month', [
+    return h('table.calendar__month', { key: isoDateString(month) }, [
       h('thead.calendar__head', [
         h('tr', h('th.calendar__month-name', { attributes: { colspan: 7 } }, format(month, 'MMM yyyy'))),
         h('tr.calendar__week-days',
@@ -85,9 +85,9 @@ export default function register() {
 
         calendarZone.run(function () {
           // ngModel integration
-          setSelected = function (date) {
-            selected = { start: date, end: date }
-            ngModel.$setViewValue(date)
+          setSelected = function (day) {
+            selected = { start: day, end: day }
+            ngModel.$setViewValue(day)
           }
 
           calendarTree = buildCalendarTree(month, selected, { onclick: setSelected })
