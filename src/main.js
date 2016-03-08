@@ -3,6 +3,7 @@ import angular from 'angular'
 
 import 'main.css'
 
+import { default as registerDemoCtrl } from 'demo_ctrl'
 import { default as registerDropdown } from 'dropdown/dropdown'
 import { default as registerCalendar } from 'calendar/calendar'
 import { default as registerRangeCalendar } from 'range_calendar/range_calendar'
@@ -10,6 +11,7 @@ import { default as registerRangeCalendar } from 'range_calendar/range_calendar'
 import * as dates from 'misc/dates'
 
 angular.module('markup', [])
+  ::registerDemoCtrl()
   ::registerDropdown()
   ::registerCalendar()
   ::registerRangeCalendar()

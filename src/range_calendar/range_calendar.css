@@ -14,3 +14,33 @@
 .calendar__month {
   margin: 0 20px;
 }
+
+.range-calendar__footer {
+  font-size: 13px;
+}
+
+.range-calendar__preselect-functions {
+  margin-left: 10px;
+  float: left;
+}
+
+.range-calendar__preselect-function {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.range-calendar__preselect-function:hover {
+  color: #2f3137;
+}
+
+.range-calendar__selected-view {
+  margin-right: 20px;
+  float: right;
+}
+
+.range-calendar__selected-date {
+  display: inline-block;
+  min-width: 85px;
+}
+.range-calendar__selected-date--start { text-align: right; }
+.range-calendar__selected-date--selecting { color: #a2aab2; }

@@ -2,35 +2,58 @@ import 'button/button.css'
 import 'calendar/calendar.css'
 import 'range_calendar/range_calendar.css'
 
+import preselectFunctionRegister from 'range_calendar/range_calendar_preselect_function'
+
 import tmpl from 'range_calendar/range_calendar_tmpl.slim'
 
 import zone from 'zone'
 
-import { } from 'ramda'
-import { noon, isDayBefore } from 'instadate'
+import $ from 'jquery'
+import { forEach } from 'ramda'
+import { noon, isDayBefore, isSameDay } from 'instadate'
 import { h, diff, patch, create as createElement } from 'virtual-dom'
-import { nextMonth, prevMonth } from 'misc/dates'
+import { nextMonth, prevMonth, format } from 'misc/dates'
 
 import { buildCalendarTree } from 'calendar/calendar'
 
 function noop() {}
 
 export default function register() {
+  preselectFunctionRegister.apply(this, [])
+
   return this.directive('rangeCalendar', /* @ngInject */ function () {
     return {
       restrict: 'E',
       template: tmpl,
       replace: true,
-      require: ['ngModel'],
+      transclude: true,
+      require: ['ngModel', 'rangeCalendar'],
 
-      link(scope, el, attrs, [ngModel]) {
+      controller() {
+        return {
+          preselectFunctions: [],
+          registerPreselectFunction(title, func) {
+            const funcConfig = { title, func }
+            this.preselectFunctions.push(funcConfig)
+            return funcConfig
+          }
+        }
+      },
+
+      link(scope, el, attrs, [ngModel, ctrl]) {
+        scope.ctrl = ctrl
+        
         let month = noon(new Date())
         let selected = {}
+        let fixedDay
         let onclick = noop
         let onmouseover = noop
 
         let rangeCalendarTree
         let rangeCalendarNode
+
+        let dateViewTree
+        let dateViewNode
 
         function buildRangeCalendarTree(events) {
           return h('.range-calendar__months', [
@@ -39,6 +62,21 @@ export default function register() {
             buildCalendarTree(nextMonth(month), selected, events),
           ])
         }
+
+        function buildDateViewTree() {
+          function selectingClass(date) {
+            return !fixedDay || isSameDay(fixedDay, date) ? '' : 'range-calendar__selected-date--selecting'
+          }
+
+          return selected.start && selected.end ?
+            h('.range-calendar__selected-view', [
+              h('span.range-calendar__selected-date.range-calendar__selected-date--start',
+                { className: selectingClass(selected.start) }, format(selected.start, 'MMM dd, yyyy')),
+              ' — ',
+              h('span.range-calendar__selected-date',
+                { className: selectingClass(selected.end) }, format(selected.end, 'MMM dd, yyyy'))
+            ]) : h('span')
+        }
         
         const rangeCalendarZone = zone.fork({
           afterTask() {
@@ -46,6 +84,11 @@ export default function register() {
             const patches = diff(rangeCalendarTree, newTree)
             rangeCalendarNode = patch(rangeCalendarNode, patches)
             rangeCalendarTree = newTree
+
+            const newTree2 = buildDateViewTree()
+            const patches2 = diff(dateViewTree, newTree2)
+            dateViewNode = patch(dateViewNode, patches2)
+            dateViewTree = newTree2
           }
         })
 
@@ -55,16 +98,25 @@ export default function register() {
         })
 
         rangeCalendarZone.run(function () {
+          ctrl.preselectFunctions = forEach(function (funcConfig) {
+            const func = funcConfig.func
+            funcConfig.func = function () {
+              selected = func(selected)
+              ngModel.$setViewValue(selected)
+            }
+          }, ctrl.preselectFunctions)
+
           // ngModel integration
           onclick = function (day) {
             if (onmouseover !== noop) {
               ngModel.$setViewValue(selected)
               onmouseover = noop
+              fixedDay = undefined
               el.removeClass('range-calendar--selecting')
             } else {
               el.addClass('range-calendar--selecting')
               selected = { start: day, end: day }
-              const fixedDay = day
+              fixedDay = day
               onmouseover = function (day) {
                 if (isDayBefore(day, fixedDay)) {
                   selected = { start: day, end: fixedDay }
@@ -80,12 +132,28 @@ export default function register() {
 
           el.find('.months--placeholder').replaceWith(rangeCalendarNode)
 
+          dateViewTree = buildDateViewTree()
+          dateViewNode = createElement(dateViewTree)
+
+          el.find('.range-calendar__selected-view--placeholder').replaceWith(dateViewNode)
+
           el.on('click', '.calendar__next', function () {
             month = nextMonth(month)
           })
 
           el.on('click', '.calendar__previous', function () {
             month = prevMonth(month)
+          })
+
+          el.on('click', '.range-calendar__months', function (e) {
+            e.stopPropagation()
+          })
+
+          $(document).on('click', function () {
+            onmouseover = noop
+            fixedDay = undefined
+            el.removeClass('range-calendar--selecting')
+            ngModel.$render()
           })
         })
       }
