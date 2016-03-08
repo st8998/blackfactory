@@ -15,6 +15,8 @@ const autoprefixer = require('autoprefixer')
 const autoreset = require('postcss-autoreset')
 const cssnext = require('postcss-cssnext')
 const postcssSVG = require('postcss-inline-svg')
+const postcssMixins = require('postcss-mixins')
+const postcssNested = require('postcss-nested')
 
 // CSS
 gulp.task('css', function () {
@@ -83,10 +85,10 @@ const config = {
     return [
       cssnext(),
       postcssSVG({ path: './src' }),
+      postcssMixins(),
+      postcssNested(),
       autoreset({
         reset: {
-          margin: 0,
-          padding: 0,
           'box-sizing': 'border-box',
         },
       }),

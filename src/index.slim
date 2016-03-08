@@ -24,16 +24,18 @@ html
                   .dropdown__body.dropdown__body--white
                     calendar ng-model="date1"
     section
-      h2 Dropdown calendar {{date1 | date:'dd-MM-yyyy'}}
+      h2 Dropdown calendar
       .dropdown[ dropdown ]
         span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+          | {{date1 | date:'MMM dd, yyyy'}}
         .dropdown__body.dropdown__body--white
           calendar ng-model="date1"
 
     section
-      h2 Dropdown range calendar {{range1.start | date:'dd-MM-yyyy'}} -  {{range1.end | date:'dd-MM-yyyy'}}
+      h2 Dropdown range calendar
       .dropdown[ dropdown dropdown--open="open" ]
         span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+          | {{range1.start | date:'MMM dd, yyyy'}} -  {{range1.end | date:'MMM dd, yyyy'}}
         .dropdown__body.dropdown__body--white
           range-calendar ng-model="range1" marker="1"
             /range-calendar-preselect-function title="Previous month" func="PREVIOUS_MONTH"

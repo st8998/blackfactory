@@ -50,6 +50,8 @@
     "postcss-autoreset": "^1.1.5",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
+    "postcss-mixins": "^4.0.1",
+    "postcss-nested": "^1.0.0",
     "protractor": "^3.1.0",
     "slm-loader": "^0.1.1",
     "style-loader": "^0.13.0",

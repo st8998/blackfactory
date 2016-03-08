@@ -3,12 +3,31 @@ span.button, a.button {
 }
 
 .button {
+  font-size: 13px;
+  line-height: 24px;
   height: 26px;
-  width: 26px;
+  min-width: 26px;
   border: 1px solid #d5dbe2;
   border-radius: 20px;
   cursor: pointer;
   user-select: none;
+  text-align: center;
+
+  padding: 0 20px;
+
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+
+@define-mixin with-icon {
+  background-position: 8px 6px;
+  padding-left: 30px;
+  background-size: 12px 12px;
+
+  &:empty {
+    background-position: center;
+    padding: 0;
+  }
 }
 
 .button:hover {
@@ -20,13 +39,16 @@ span.button, a.button {
 }
 
 .button--calendar {
-  background: svg-load('button/calendar.svg', fill: #8b95a0) transparent center/45% no-repeat;
+  @mixin with-icon 12px;
+  background-image: svg-load('button/calendar.svg', fill: #8b95a0);
 }
 
 .button--previous {
-  background: svg-load('button/arrow-left.svg', fill: #8b95a0) transparent center/35% no-repeat;
+  @mixin with-icon 12px;
+  background-image: svg-load('button/arrow-left.svg', fill: #8b95a0);
 }
 
 .button--next {
-  background: svg-load('button/arrow-right.svg', fill: #8b95a0) transparent center/35% no-repeat;
+  @mixin with-icon 12px;
+  background-image: svg-load('button/arrow-right.svg', fill: #8b95a0);
 }
