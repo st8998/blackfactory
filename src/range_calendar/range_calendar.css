@@ -16,11 +16,15 @@
 }
 
 .range-calendar__footer {
+  border-top: 1px solid #e2e4e7;
+  padding: 25px 0 10px 0;
+  margin: 0 20px;
   font-size: 13px;
+  overflow: hidden;
 }
 
 .range-calendar__preselect-functions {
-  margin-left: 10px;
+  margin-left: -10px;
   float: left;
 }
 
@@ -34,13 +38,12 @@
 }
 
 .range-calendar__selected-view {
-  margin-right: 20px;
   float: right;
 }
 
 .range-calendar__selected-date {
   display: inline-block;
-  min-width: 85px;
+  min-width: 80px;
 }
 .range-calendar__selected-date--start { text-align: right; }
 .range-calendar__selected-date--selecting { color: #a2aab2; }

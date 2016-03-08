@@ -38,6 +38,10 @@
   background-color: #fff;
 }
 
+.dropdown__body--white .button:hover {
+  background-color: #fcfcfc;
+}
+
 .dropdown__body--open {
   display: inherit;
   position: absolute;

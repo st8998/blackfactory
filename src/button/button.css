@@ -20,8 +20,8 @@ span.button, a.button {
 }
 
 @define-mixin with-icon {
-  background-position: 8px 6px;
-  padding-left: 30px;
+  background-position: 10px 6px;
+  padding-left: 32px;
   background-size: 12px 12px;
 
   &:empty {
