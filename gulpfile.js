@@ -47,9 +47,14 @@ gulp.task('slim-watch', ['slim'], function () {
 
 // WEBPACK CONFIG
 const config = {
-  entry: { main: './src/main.js', spec: './tests/spec/main_spec.js', e2e: './tests/e2e/main_e2e.js' },
+  entry: {
+    vendor: ['jquery', 'angular', 'instadate', 'ramda', 'zone.js', 'virtual-dom'],
+    main: './src/main.js',
+    spec: './tests/spec/main_spec.js',
+    e2e: './tests/e2e/main_e2e.js'
+  },
   target: 'web',
-  devtool: 'source-map',
+  devtool: '#inline-source-map',
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
@@ -76,7 +81,7 @@ const config = {
       },
     ],
   },
-  plugins: [],
+  plugins: [new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity)],
   resolve: {
     extensions: ['', '.js'],
     modulesDirectories: ['./src', './tests', 'node_modules'],

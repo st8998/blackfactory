@@ -36,8 +36,8 @@
   margin-top: -13px;
 }
 
-.calendar__previous { left: 13px; }
-.calendar__next { right: 13px; }
+.calendar__previous { left: 16px; }
+.calendar__next { right: 16px; }
 
 .calendar__day {
   vertical-align: middle;

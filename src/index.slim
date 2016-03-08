@@ -3,6 +3,7 @@ html
   head
     meta charset="utf-8"
     title Markup
+    script src="./vendor.js"
     script src="./main.js"
 
   body ng-app="markup" ng-controller="demoCtrl"
@@ -33,7 +34,7 @@ html
 
     section
       h2 Dropdown range calendar
-      .dropdown[ dropdown dropdown--open="open" ]
+      .dropdown[ dropdown ]
         span.button.button--calendar.dropdown__action-button title="Select date" role="link"
           | {{range1.start | date:'MMM dd, yyyy'}} -  {{range1.end | date:'MMM dd, yyyy'}}
         .dropdown__body.dropdown__body--white

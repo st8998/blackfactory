@@ -11,7 +11,7 @@
   min-height: 256px;
 }
 
-.calendar__month {
+.range-calendar .calendar__month {
   margin: 0 20px;
 }
 
