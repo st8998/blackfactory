@@ -46,8 +46,8 @@ export default function register() {
         let month = noon(new Date())
         let selected = {}
         let fixedDay
-        let onclick = noop
-        let onmouseover = noop
+        let onclick = undefined
+        let onmouseover = undefined
 
         let rangeCalendarTree
         let rangeCalendarNode
@@ -108,15 +108,31 @@ export default function register() {
 
           // ngModel integration
           onclick = function (day) {
-            if (onmouseover !== noop) {
+            if (onmouseover !== undefined) {
               ngModel.$setViewValue(selected)
-              onmouseover = noop
+              onmouseover = undefined
               fixedDay = undefined
               el.removeClass('range-calendar--selecting')
+
+              el.off('click.range-calendar-end-selecting')
+              $(document).off('click.range-calendar-end-selecting')
             } else {
               el.addClass('range-calendar--selecting')
               selected = { start: day, end: day }
               fixedDay = day
+
+              el.on('click.range-calendar-end-selecting', '.range-calendar__months', function (e) {
+                e.stopPropagation()
+              })
+              $(document).on('click.range-calendar-end-selecting', function () {
+                onmouseover = undefined
+                fixedDay = undefined
+                el.removeClass('range-calendar--selecting')
+                ngModel.$render()
+                el.off('click.range-calendar-end-selecting')
+                $(document).off('click.range-calendar-end-selecting')
+              })
+
               onmouseover = function (day) {
                 if (isDayBefore(day, fixedDay)) {
                   selected = { start: day, end: fixedDay }
@@ -143,17 +159,6 @@ export default function register() {
 
           el.on('click', '.calendar__previous', function () {
             month = prevMonth(month)
-          })
-
-          el.on('click', '.range-calendar__months', function (e) {
-            e.stopPropagation()
-          })
-
-          $(document).on('click', function () {
-            onmouseover = noop
-            fixedDay = undefined
-            el.removeClass('range-calendar--selecting')
-            ngModel.$render()
           })
         })
       }

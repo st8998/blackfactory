@@ -16,7 +16,7 @@ export function buildCalendarTree(month, { start, end }, dayEvents) {
 
   const dayNodes = map(function (day) {
     const bindEvents = map(function (onEvent) {
-      return onEvent.bind(this, day)
+      return onEvent ? onEvent.bind(this, day) : onEvent
     })
 
     let className = 'calendar__day'
