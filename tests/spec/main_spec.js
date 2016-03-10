@@ -6,8 +6,9 @@ import 'spec/calendar/calendar_spec'
 
 import toHaveSameDay from 'matchers/to_have_same_day'
 import toHaveClass from 'matchers/to_have_class'
+import toHaveExtendedMonthDayNodes from 'matchers/to_have_extended_month_day_nodes'
 
 beforeEach(function () {
-  jasmine.addMatchers({ toHaveSameDay, toHaveClass })
+  jasmine.addMatchers({ toHaveSameDay, toHaveClass, toHaveExtendedMonthDayNodes })
 })
 

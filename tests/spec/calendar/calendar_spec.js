@@ -30,8 +30,7 @@ describe('calendar', function () {
 
   it('opens on today month', function () {
     expect(el.find('.calendar__month-name').text()).toEqual('Mar 2016')
-    expect(el.find('.calendar__day').get().map(node => Number(node.textContent)))
-      .toEqual(d.extendedMonthDays(today).map(day => day.getDate()))
+    expect(el).toHaveExtendedMonthDayNodes(today)
   })
 
   it('sets other-day class for days from sibling months', function () {
@@ -51,15 +50,13 @@ describe('calendar', function () {
   it('shows previous month after prev month button click', function () {
     el.find('.calendar__previous').click()
     expect(el.find('.calendar__month-name').text()).toEqual('Feb 2016')
-    expect(el.find('.calendar__day').get().map(node => Number(node.textContent)))
-      .toEqual(d.extendedMonthDays(d.prevMonth(today)).map(day => day.getDate()))
+    expect(el).toHaveExtendedMonthDayNodes(d.prevMonth(today))
   })
 
   it('shows next month after next month button click', function () {
     el.find('.calendar__next').click()
     expect(el.find('.calendar__month-name').text()).toEqual('Apr 2016')
-    expect(el.find('.calendar__day').get().map(node => Number(node.textContent)))
-      .toEqual(d.extendedMonthDays(d.nextMonth(today)).map(day => day.getDate()))
+    expect(el).toHaveExtendedMonthDayNodes(d.nextMonth(today))
   })
 
   it('set ng-model to selected day on click', function () {
