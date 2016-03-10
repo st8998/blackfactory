@@ -8,10 +8,10 @@ import zone from 'zone'
 import { map, splitEvery, compose, merge } from 'ramda'
 import { noon, isSameDay, isDayBetween, isoDateString } from 'instadate'
 import { h, diff, patch, create as createElement } from 'virtual-dom'
-import { nextMonth, prevMonth, extendedMonthDays, format } from 'misc/dates'
+import { nextMonth, prevMonth, extendedMonthDays, format, today } from 'misc/dates'
 
 export function buildCalendarTree(month, { start, end }, dayEvents) {
-  const today = noon(new Date())
+  const todayDate = today()
   const currMonth = month.getMonth()
 
   const dayNodes = map(function (day) {
@@ -24,7 +24,7 @@ export function buildCalendarTree(month, { start, end }, dayEvents) {
     if (day.getMonth() !== currMonth) {
       className += ' calendar__day--other-month'
     } else {
-      if (isSameDay(day, today)) className += ' calendar__day--today'
+      if (isSameDay(day, todayDate)) className += ' calendar__day--today'
 
       if (start && isSameDay(day, start)) className += ' calendar__day--selected calendar__day--selected-start'
       if (end && isSameDay(day, end)) className += ' calendar__day--selected calendar__day--selected-end'

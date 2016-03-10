@@ -1,4 +1,4 @@
-import { firstDateInMonth, lastDateInMonth, addDays, dates, isoWeekDay } from 'instadate'
+import { firstDateInMonth, lastDateInMonth, addDays, dates, isoWeekDay, noon } from 'instadate'
 
 export function extendedMonthDays(_month) {
   const month = new Date(_month)
@@ -20,6 +20,10 @@ export function nextMonth(_month, monthsToSkip = 1) {
 export function prevMonth(_month, monthsToSkip = 1) {
   return monthsToSkip === 0 ? _month :
     prevMonth(firstDateInMonth(addDays(firstDateInMonth(new Date(_month)), -1)), monthsToSkip - 1)
+}
+
+export function today() {
+  return noon(new Date())
 }
 
 export function format() {
