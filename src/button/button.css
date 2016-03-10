@@ -13,6 +13,7 @@ span.button, a.button {
   user-select: none;
   text-align: center;
 
+  margin: 0;
   padding: 0 20px;
 
   background-color: transparent;
@@ -39,16 +40,16 @@ span.button, a.button {
 }
 
 .button--calendar {
-  @mixin with-icon 12px;
+  @mixin with-icon;
   background-image: svg-load('button/calendar.svg', fill: #8b95a0);
 }
 
 .button--previous {
-  @mixin with-icon 12px;
+  @mixin with-icon;
   background-image: svg-load('button/arrow-left.svg', fill: #8b95a0);
 }
 
 .button--next {
-  @mixin with-icon 12px;
+  @mixin with-icon;
   background-image: svg-load('button/arrow-right.svg', fill: #8b95a0);
 }
