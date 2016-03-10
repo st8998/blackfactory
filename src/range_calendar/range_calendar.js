@@ -121,9 +121,10 @@ export default function register() {
               selected = { start: day, end: day }
               fixedDay = day
 
-              el.on('click.range-calendar-end-selecting', '.range-calendar__months', function (e) {
+              el.on('click.range-calendar-end-selecting', function (e) {
                 e.stopPropagation()
               })
+
               $(document).on('click.range-calendar-end-selecting', function () {
                 onmouseover = undefined
                 fixedDay = undefined

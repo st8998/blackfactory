@@ -12,7 +12,6 @@ const childProcess = require('child_process')
 
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const autoreset = require('postcss-autoreset')
 const cssnext = require('postcss-cssnext')
 const postcssSVG = require('postcss-inline-svg')
 const postcssMixins = require('postcss-mixins')
@@ -92,11 +91,6 @@ const config = {
       postcssSVG({ path: './src' }),
       postcssMixins(),
       postcssNested(),
-      autoreset({
-        reset: {
-          'box-sizing': 'border-box',
-        },
-      }),
     ]
   },
 }

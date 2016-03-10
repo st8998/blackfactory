@@ -1,8 +1,5 @@
-span.button, a.button {
-  display: inline-block;
-}
-
 .button {
+  display: inline-block;
   font-size: 13px;
   line-height: 24px;
   height: 26px;
@@ -26,6 +23,7 @@ span.button, a.button {
   background-size: 12px 12px;
 
   &:empty {
+    vertical-align: middle;
     background-position: center;
     padding: 0;
   }

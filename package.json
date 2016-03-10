@@ -47,7 +47,6 @@
     "minimist": "^1.2.0",
     "ng-annotate-loader": "^0.1.0",
     "nodemon": "^1.8.1",
-    "postcss-autoreset": "^1.1.5",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.8.1",
     "postcss-mixins": "^4.0.1",
