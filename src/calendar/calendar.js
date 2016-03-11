@@ -63,24 +63,28 @@ export default function register() {
       require: ['ngModel'],
 
       link(scope, el, attrs, [ngModel]) {
-        let month = noon(new Date())
+        let month
         let selected = {}
         let setSelected
 
-        let calendarTree
-        let calendarNode
+        let calendarTree = h('.calendar__month')
+        let calendarNode = createElement(calendarTree)
+        el.find('.calendar__month--placeholder').replaceWith(calendarNode)
 
         const calendarZone = zone.fork({
           afterTask() {
-            const newTree = buildCalendarTree(month, selected, { onclick: setSelected })
-            const patches = diff(calendarTree, newTree)
-            calendarNode = patch(calendarNode, patches)
-            calendarTree = newTree
+            if (month) {
+              const newTree = buildCalendarTree(month, selected, { onclick: setSelected })
+              const patches = diff(calendarTree, newTree)
+              calendarNode = patch(calendarNode, patches)
+              calendarTree = newTree
+            }
           }
         })
 
         ngModel.$render = calendarZone.bind(function () {
           selected = { start: ngModel.$viewValue, end: ngModel.$viewValue }
+          month = ngModel.$viewValue instanceof Date ? ngModel.$viewValue : noon(new Date())
         })
 
         calendarZone.run(function () {
@@ -89,11 +93,6 @@ export default function register() {
             selected = { start: day, end: day }
             ngModel.$setViewValue(day)
           }
-
-          calendarTree = buildCalendarTree(month, selected, { onclick: setSelected })
-          calendarNode = createElement(calendarTree)
-
-          el.find('.calendar__month--placeholder').replaceWith(calendarNode)
 
           el.on('click', '.calendar__next', function () {
             month = nextMonth(month)
