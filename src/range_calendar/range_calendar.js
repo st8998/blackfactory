@@ -10,13 +10,11 @@ import zone from 'zone'
 
 import $ from 'jquery'
 import { forEach } from 'ramda'
-import { noon, isDayBefore, isSameDay } from 'instadate'
+import { isDayBefore, isSameDay } from 'instadate'
 import { h, diff, patch, create as createElement } from 'virtual-dom'
 import { nextMonth, prevMonth, format } from 'misc/dates'
 
 import { buildCalendarTree } from 'calendar/calendar'
-
-function noop() {}
 
 export default function register() {
   preselectFunctionRegister.apply(this, [])
@@ -43,7 +41,7 @@ export default function register() {
       link(scope, el, attrs, [ngModel, ctrl]) {
         scope.ctrl = ctrl
         
-        let month = noon(new Date())
+        let month
         let selected = {}
         let fixedDay
         let onclick = undefined
@@ -77,24 +75,40 @@ export default function register() {
                 { className: selectingClass(selected.end) }, format(selected.end, 'MMM dd, yyyy'))
             ]) : h('span')
         }
-        
+
+        rangeCalendarTree = h('.range-calendar__months')
+        rangeCalendarNode = createElement(rangeCalendarTree)
+        el.find('.months--placeholder').replaceWith(rangeCalendarNode)
+
+        dateViewTree = h('.range-calendar__selected-view')
+        dateViewNode = createElement(dateViewTree)
+        el.find('.range-calendar__selected-view--placeholder').replaceWith(dateViewNode)
+
         const rangeCalendarZone = zone.fork({
           afterTask() {
-            const newTree = buildRangeCalendarTree({ onclick, onmouseover })
-            const patches = diff(rangeCalendarTree, newTree)
-            rangeCalendarNode = patch(rangeCalendarNode, patches)
-            rangeCalendarTree = newTree
+            if (month) {
+              const newTree = buildRangeCalendarTree({ onclick, onmouseover })
+              const patches = diff(rangeCalendarTree, newTree)
+              rangeCalendarNode = patch(rangeCalendarNode, patches)
+              rangeCalendarTree = newTree
 
-            const newTree2 = buildDateViewTree()
-            const patches2 = diff(dateViewTree, newTree2)
-            dateViewNode = patch(dateViewNode, patches2)
-            dateViewTree = newTree2
+              const newTree2 = buildDateViewTree()
+              const patches2 = diff(dateViewTree, newTree2)
+              dateViewNode = patch(dateViewNode, patches2)
+              dateViewTree = newTree2
+            }
           }
         })
 
         ngModel.$render = rangeCalendarZone.bind(function () {
-          const value = ngModel.$viewValue || {}
+          const value = ngModel.$viewValue || { start: new Date(), end: new Date() }
           selected = { start: value.start || value.end, end: value.end || value.start }
+
+          const monthDiff = Number(format(selected.end, 'yyyyMM')) -
+            Number(format(selected.start, 'yyyyMM'))
+
+          month = monthDiff === 0 ? selected.start :
+            (monthDiff > 0 && monthDiff < 3) ? nextMonth(selected.start) : prevMonth(selected.end)
         })
 
         rangeCalendarZone.run(function () {
@@ -143,16 +157,6 @@ export default function register() {
               }
             }
           }
-
-          rangeCalendarTree = buildRangeCalendarTree({ onclick, onmouseover })
-          rangeCalendarNode = createElement(rangeCalendarTree)
-
-          el.find('.months--placeholder').replaceWith(rangeCalendarNode)
-
-          dateViewTree = buildDateViewTree()
-          dateViewNode = createElement(dateViewTree)
-
-          el.find('.range-calendar__selected-view--placeholder').replaceWith(dateViewNode)
 
           el.on('click', '.calendar__next', function () {
             month = nextMonth(month)
