@@ -1,14 +1,12 @@
 {
-  "name": "OneWay",
+  "name": "Markup",
   "version": "0.0.0",
-  "description": "Demo project for Angular One Way idea",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Demo project for Angular and markup",
   "author": "Ivan Efremov",
   "license": "",
   "dependencies": {
-    "angular": "^1.4.9",
+    "angular": "^1.5.0",
+    "angular-route": "^1.5.0",
     "instadate": "^0.1.7",
     "jquery": "^2.2.1",
     "ramda": "^0.19.0",

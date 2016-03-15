@@ -5,6 +5,8 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -13,4 +15,8 @@ body {
 
 section {
   margin: 20px;
+}
+
+.main {
+  padding: 0 28px;
 }

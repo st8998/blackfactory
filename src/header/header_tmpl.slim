@@ -1,0 +1,9 @@
+.header
+  h1.header__logo
+    a href="#/" title="Markup Project" Markup Project
+
+  ul.header__menu
+    li.header__menu-item ng-class="{'header__menu-item--active': $ctrl.page.currentPage == 'home'}"
+      a href="#/" ROOT
+    li.header__menu-item ng-class="{'header__menu-item--active': $ctrl.page.currentPage == 'activities'}"
+      a href="#/activities" ACTIVITIES
