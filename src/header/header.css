@@ -1,6 +1,8 @@
 .header {
   height: 75px;
-  margin: 0 0 15px 0;
+  padding: 0 0 15px 0;
+  border-bottom: solid 1px #e0e3e7;
+  box-shadow: 0 1px 0 #fefefe;
 }
 
 .header__logo {
@@ -28,6 +30,7 @@
 }
 
 .header__menu-item {
+  position: relative;
   display: inline-block;
   margin: 0 15px;
   padding: 0;
@@ -49,5 +52,13 @@
 }
 .header__menu-item--active a {
   color: #47515c;
-  border-bottom: 3px solid #80909e;
+}
+.header__menu-item--active:after {
+  content: "";
+  position: absolute;
+  background-color: #80909e;
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: -17px;
 }

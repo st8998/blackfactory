@@ -47,7 +47,7 @@ gulp.task('slim-watch', ['slim'], function () {
 // WEBPACK CONFIG
 const config = {
   entry: {
-    vendor: ['jquery', 'angular', 'angular-route', 'instadate', 'ramda', 'zone.js', 'virtual-dom'],
+    vendor: ['jquery', 'angular', 'angular-route', 'angular-animate', 'instadate', 'ramda', 'zone.js', 'virtual-dom'],
     main: './src/main.js',
     spec: './tests/spec/main_spec.js',
     e2e: './tests/e2e/main_e2e.js'

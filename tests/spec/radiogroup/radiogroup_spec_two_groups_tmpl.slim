@@ -1,0 +1,20 @@
+div
+  ul.x1[ radiogroup ng-model="data.x1" ]
+    li
+      input type="radio" value="0"
+    li
+      input type="radio" value="1"
+    li
+      input type="radio" value="2"
+
+  ul.x2[ radiogroup ng-model="data.x2" ]
+    li
+      input type="radio" ng-value="0"
+    li
+      input type="radio" ng-value="arr"
+    li
+      input type="radio" ng-value="obj"
+
+  ul.x3[ radiogroup ng-model="data.x3" ]
+    li ng-repeat="x in [0,1,2]"
+      input type="radio" ng-value="x"

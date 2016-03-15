@@ -1,0 +1,41 @@
+.color-picker {
+  min-width: 208px;
+  overflow: hidden;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.color-picker__color {
+  float: left;
+  margin: 5px 2px;
+  border-radius: 22px;
+  height: 22px;
+  width: 22px;
+  position: relative;
+  box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.color-picker__color input {
+  margin-left: -9000px;
+}
+
+.color-picker__color input:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  left: 5px;
+  top: 5px;
+  border-radius: 12px;
+  height: 12px;
+  width: 12px;
+  transform: scale(0);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+}
+.color-picker__color input:checked:after {
+  transform: scale(1);
+  opacity: 1;
+}

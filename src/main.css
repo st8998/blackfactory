@@ -17,6 +17,22 @@ section {
   margin: 20px;
 }
 
-.main {
-  padding: 0 28px;
+.centered-container {
+  margin: 0 auto;
+  width: 996px;
+  padding: 40px 8px;
+}
+
+.section-header {
+  border-bottom: 1px solid #e2e4e7;
+  padding: 0 0 6px;
+}
+
+.section-header__title {
+  color: #47515c;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 36px;
 }
