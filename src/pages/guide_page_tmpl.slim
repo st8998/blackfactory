@@ -1,0 +1,58 @@
+.centered-container
+  section ng-init="data = { }"
+    .section-header
+      h3.section-header__title Dropdown Calendars
+
+    .section-body
+      .dropdown[ dropdown ]
+        span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+        .dropdown__body.dropdown__body--white
+          h1 ONE
+
+          .dropdown[ dropdown dropdown--open="true" ]
+            span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+            .dropdown__body.dropdown__body--white
+              h2 TWO
+
+              .dropdown[ dropdown dropdown--open="true" ]
+                span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+                .dropdown__body.dropdown__body--white
+                  calendar ng-model="data.date1"
+      | &nbsp;&nbsp;&nbsp;
+      .dropdown[ dropdown ]
+        span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+          | {{data.date1 | date:'MMM dd, yyyy'}}
+        .dropdown__body.dropdown__body--white
+          calendar ng-model="data.date1"
+      | &nbsp;&nbsp;&nbsp;
+      .dropdown[ dropdown ]
+        span.button.button--calendar.dropdown__action-button title="Select date" role="link"
+          | {{data.range1.start | date:'MMM dd, yyyy'}} — {{data.range1.end | date:'MMM dd, yyyy'}}
+        .dropdown__body.dropdown__body--white
+          range-calendar ng-model="data.range1" marker="1"
+            range-calendar-preselect-function title="Previous month" func="PREVIOUS_MONTH"
+            range-calendar-preselect-function title="Current month" func="CURRENT_MONTH"
+
+  section ng-init="data.color = 1"
+    .section-header
+      h3.section-header__title Colorpicker
+
+    .section-body
+      .dropdown [ dropdown ]
+        span.button.button--eyedropper.dropdown__action-button Pick Color
+        .dropdown__body.dropdown__body--white
+          color-picker ng-model="data.color"
+
+  section
+    .section-header
+      h3.section-header__title Flipping Card
+    .section-body
+      .flipping-card-container[ flipping-card style="width: 111px; height: 111px" ]
+        .flipping-card
+          .flipping-card__front.dropdown__body.dropdown__body--white
+            h4 FRONT SIDE
+            span.button.button--small.flipping-card__flip-button FLIP ->
+
+          .flipping-card__back.dropdown__body.dropdown__body--white
+            h4 BACK SIDE
+            span.button.button--small.flipping-card__flip-button <- FLIP

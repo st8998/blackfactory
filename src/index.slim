@@ -9,35 +9,3 @@ html
   body[ng-app="markup" ng-jq="jQuery"]
     header page="page"
     .main[ng-view]
-    /section
-    /  h2 Calendars
-    /  div
-    /    .dropdown[ dropdown ]
-    /      span.button.button--calendar.dropdown__action-button title="Select date" role="link"
-    /      .dropdown__body.dropdown__body--white
-    /        h1 ONE
-    /
-    /        .dropdown[ dropdown dropdown--open="true" ]
-    /          span.button.button--calendar.dropdown__action-button title="Select date" role="link"
-    /          .dropdown__body.dropdown__body--white
-    /            h2 TWO
-    /
-    /            .dropdown[ dropdown dropdown--open="true" ]
-    /              span.button.button--calendar.dropdown__action-button title="Select date" role="link"
-    /              .dropdown__body.dropdown__body--white
-    /                calendar ng-model="data.date1"
-    /    | &nbsp;&nbsp;&nbsp;
-    /    .dropdown[ dropdown ]
-    /      span.button.button--calendar.dropdown__action-button title="Select date" role="link"
-    /        | {{data.date1 | date:'MMM dd, yyyy'}}
-    /      .dropdown__body.dropdown__body--white
-    /        calendar ng-model="data.date1"
-    /    | &nbsp;&nbsp;&nbsp;
-    /    .dropdown[ dropdown ]
-    /      span.button.button--calendar.dropdown__action-button title="Select date" role="link"
-    /        | {{data.range1.start | date:'MMM dd, yyyy'}} — {{data.range1.end | date:'MMM dd, yyyy'}}
-    /      .dropdown__body.dropdown__body--white
-    /        range-calendar ng-model="data.range1" marker="1"
-    /          /range-calendar-preselect-function title="Previous month" func="PREVIOUS_MONTH"
-    /          range-calendar-preselect-function title="Current month" func="CURRENT_MONTH"
-    /          range-calendar-preselect-function title="Current week" func="currentWeek"

@@ -21,8 +21,8 @@
   margin-left: -9000px;
 }
 
-.color-picker__color input:after {
-  content: "";
+.color-picker__color input+.color-picker__check-mark {
+  backface-visibility: hidden;
   display: block;
   position: absolute;
   background-color: #fff;
@@ -35,7 +35,7 @@
   opacity: 0;
   transition: opacity .3s, transform .3s;
 }
-.color-picker__color input:checked:after {
+.color-picker__color input:checked+.color-picker__check-mark {
   transform: scale(1);
   opacity: 1;
 }

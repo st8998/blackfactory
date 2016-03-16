@@ -28,6 +28,10 @@ section {
   padding: 0 0 6px;
 }
 
+.section-body {
+  padding: 10px 0;
+}
+
 .section-header__title {
   color: #47515c;
   margin: 0;

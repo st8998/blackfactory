@@ -14,6 +14,7 @@ import registerColorPicker from 'bg_colors/color_picker'
 import registerHeaderComponent from 'header/header'
 import registerHomeComponent from 'pages/home'
 import registerActivitiesPage from 'pages/activities_page'
+import registerGuidePage from 'pages/guide_page'
 
 import * as dates from 'misc/dates'
 
@@ -28,6 +29,7 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerHeaderComponent()
   ::registerHomeComponent()
   ::registerActivitiesPage()
+  ::registerGuidePage()
 
 
   .run(function ($rootScope) {
