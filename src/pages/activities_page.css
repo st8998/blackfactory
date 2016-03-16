@@ -84,3 +84,13 @@
 .activity-tile-container:hover .activity-tile__avatar .flipping-card__flip-button {
   display: inherit;
 }
+
+.activity-tile__remove-button {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.activity-tile-container:hover .activity-tile__remove-button {
+  display: inherit;
+}

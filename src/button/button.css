@@ -66,6 +66,26 @@
   background-image: svg-load('button/eyedropper.svg', fill: #a4acb5);
 }
 
+.button--remove {
+  background-size: 9px 9px;
+  vertical-align: middle;
+  background-position: center;
+  padding: 0;
+
+  background-image: svg-load('button/remove.svg', fill: #46505b);
+
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: none;
+}
+.button--remove:hover {
+  background-image: svg-load('button/remove.svg', fill: #fff);
+  background-color: #ffacac;
+  border: solid 1px #ff7777;
+}
+
+
 .button--small {
   font-size: 11px;
   line-height: 19px;

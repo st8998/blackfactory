@@ -4,8 +4,10 @@
 
   ul.activities-tiles
     li.activity-tile-container.flipping-card-container[ flipping-card  ]
-      .flipping-card.flipping-card--flipped
+      .flipping-card
         .activity-tile.flipping-card__front
+          span.button.button--remove.activity-tile__remove-button
+
           .activity-tile__avatar[ng-class="card.color | bgColor"]
             span UX
             span.button.button--white.button--small.button--eyedropper.flipping-card__flip-button
