@@ -56,3 +56,18 @@
           .flipping-card__back.dropdown__body.dropdown__body--white
             h4 BACK SIDE
             span.button.button--small.flipping-card__flip-button <- FLIP
+
+  section
+    .section-header
+      h3.section-header__title Inputs
+    .section-body
+      input.input--text type="text" value="Some text"
+      input.input--text type="text" placeholder="Some placeholder"
+
+      inline-edit ng-model="x" placeholder="Default inline input"
+      .container[ inline-edit ]
+        input#custom-inline-input.input--text.inline-edit__input ng-model="x" placeholder="Custom inline input"
+        label.inline-edit__view for="custom-inline-input"
+          | $
+          strong< ng-bind="x || 'Custom inline Edit'"
+

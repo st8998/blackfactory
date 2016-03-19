@@ -94,3 +94,41 @@
 .activity-tile-container:hover .activity-tile__remove-button {
   display: inherit;
 }
+
+.activity-tile__name {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.activity-tile__abbr {
+  display: block;
+  width: 70px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 12px;
+  color: #8896a2;
+}
+
+.activity-tile-container:hover .inline-edit__view::after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px dashed #47515c;
+  width: 100%;
+  bottom: 5px;
+  left: 0;
+}
+
+.activity-tile-container:hover .activity-tile__abbr .inline-edit__view::after {
+  border-color: #747e8a;
+}
+
+.activity-tile__abbr-hint {
+  display: block;
+  font-size: 10px;
+  color: #a2aab2;
+  text-align: center;
+  margin-top: 5px;
+}

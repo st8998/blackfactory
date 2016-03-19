@@ -1,6 +1,6 @@
 /* global angular */
 
-import twoGroupsTmpl from 'spec/radiogroup/radiogroup_spec_two_groups_tmpl.slim'
+import tmpl from './radiogroup_spec_tmpl.slim'
 
 describe('radiogroup', function () {
   let el
@@ -9,7 +9,7 @@ describe('radiogroup', function () {
   beforeEach(function () {
     angular.mock.inject(function ($compile, $rootScope) {
       scope = $rootScope.$new()
-      el = $compile(twoGroupsTmpl)(scope)
+      el = $compile(tmpl)(scope)
 
       scope.arr = [1, 2]
       scope.obj = { a: 1 }

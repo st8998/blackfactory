@@ -8,8 +8,9 @@ import registerDropdown from 'dropdown/dropdown'
 import registerCalendar from 'calendar/calendar'
 import registerRangeCalendar from 'range_calendar/range_calendar'
 import registerFlippingCard from 'flipping_card/flipping_card'
-import registerRadiogroup from 'radiogroup/radiogroup'
 import registerColorPicker from 'bg_colors/color_picker'
+
+import registerInputs from 'inputs'
 
 import registerHeaderComponent from 'header/header'
 import registerHomeComponent from 'pages/home'
@@ -23,9 +24,10 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerCalendar()
   ::registerRangeCalendar()
   ::registerFlippingCard()
-  ::registerRadiogroup()
   ::registerColorPicker()
-  
+
+  ::registerInputs()
+
   ::registerHeaderComponent()
   ::registerHomeComponent()
   ::registerActivitiesPage()

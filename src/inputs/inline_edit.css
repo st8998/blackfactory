@@ -1,0 +1,28 @@
+.inline-edit { }
+
+.inline-edit__view {
+  position: relative;
+  display: inline-block;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.inline-edit__input {
+  position: absolute;
+  left: -1000em;
+  vertical-align: inherit;
+  text-align: inherit;
+  font-size: inherit;
+  color: inherit;
+  width: inherit;
+}
+
+.inline-edit__input:focus, .inline-edit__input:focus ~.inline-edit__input {
+  position: inherit;
+  margin-left: 0;
+}
+
+.inline-edit__input:focus ~ .inline-edit__view {
+  display: none;
+}
+

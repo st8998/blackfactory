@@ -1,0 +1,20 @@
+.input--text {
+  margin: 0 auto;
+  display: block;
+  padding: 3px 14px;
+  width: 100%;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 20px;
+  border: 1px solid #d9dde0;
+  background-color: #fff;
+  color: #2f3137;
+  vertical-align: middle;
+  transition: border-color .3s, box-shadow .3s, background .3s, background-color .3s;
+}
+
+.input--text:focus {
+  border-color: #00aad8;
+  box-shadow: 0 0 4px rgba(0, 170, 216, 0.2);
+  outline: 0;
+}

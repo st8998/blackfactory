@@ -7,7 +7,8 @@ import 'spec/misc/dates_spec'
 import 'spec/calendar/calendar_spec'
 import 'spec/range_calendar/range_calendar_spec'
 import 'spec/dropdown/dropdown_spec'
-import 'spec/radiogroup/radiogroup_spec'
+import 'spec/inputs/radiogroup_spec'
+import 'spec/inputs/inline_edit_spec'
 
 import toHaveSameDay from 'matchers/to_have_same_day'
 import toHaveClass from 'matchers/to_have_class'
@@ -16,7 +17,7 @@ import toHaveExtendedMonthDayNodes from 'matchers/to_have_extended_month_day_nod
 import registerRangeCalendar from 'range_calendar/range_calendar'
 import registerCalendar from 'calendar/calendar'
 import registerDropdown from 'dropdown/dropdown'
-import registerRadiogroup from 'radiogroup/radiogroup'
+import registerInputs from 'inputs'
 
 import * as d from 'misc/dates'
 
@@ -28,7 +29,7 @@ angular.module('app', [])
   ::registerCalendar()
   ::registerRangeCalendar()
   ::registerDropdown()
-  ::registerRadiogroup()
+  ::registerInputs()
   .run(function ($filter) { d.format = $filter('date') })
   .run(function ($rootScope) {
     $rootScope.$watch(function () {
