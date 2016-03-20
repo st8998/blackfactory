@@ -8,7 +8,7 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  transition: transform .5s ease-out;
+  transition: transform .5s;
 }
 
 .flipping-card .flipping-card__front,

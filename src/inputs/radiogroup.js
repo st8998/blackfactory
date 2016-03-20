@@ -6,16 +6,13 @@ export default function register() {
       restrict: 'A',
       require: ['ngModel'],
       scope: true,
-      controller() {},
+      controller() { this.name = randomStr(10) },
 
       compile(tEl) {
         tEl.find('input[type="radio"]')
           .attr('radiogroup-radio', 'radiogroup-radio')
 
         return function link(scope, el, attrs, [ngModel]) {
-          const name = randomStr(10)
-          el.find('input[type="radio"]').attr('name', name)
-
           ngModel.$render = function () {
             scope.$evalAsync(function () {
               scope.$broadcast('select-radio', ngModel.$viewValue)
@@ -33,7 +30,9 @@ export default function register() {
       restrict: 'A',
       require: ['^radiogroup'],
       scope: false,
-      link(scope, el, attrs) {
+      link(scope, el, attrs, [radiogroup]) {
+        el.attr('name', radiogroup.name)
+
         el.on('click', function () {
           scope.$emit('radio-selected', attrs.value)
         })

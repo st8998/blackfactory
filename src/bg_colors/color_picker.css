@@ -6,8 +6,12 @@
   padding: 0;
 }
 
-.color-picker__color {
+.color-picker li {
   float: left;
+}
+
+.color-picker__color {
+  display: inline-block;
   margin: 5px 2px;
   border-radius: 22px;
   height: 22px;
@@ -18,11 +22,11 @@
 }
 
 .color-picker__color input {
-  margin-left: -9000px;
+  left: -9000px;
+  position: absolute;
 }
 
 .color-picker__color input+.color-picker__check-mark {
-  backface-visibility: hidden;
   display: block;
   position: absolute;
   background-color: #fff;

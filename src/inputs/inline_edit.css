@@ -9,7 +9,7 @@
 
 .inline-edit__input {
   position: absolute;
-  left: -1000em;
+  top: -9000px;
   vertical-align: inherit;
   text-align: inherit;
   font-size: inherit;
