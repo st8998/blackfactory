@@ -3,5 +3,6 @@
   "requireSemicolons": false,
   "maximumLineLength": 120,
   "requireTrailingComma": false,
-  "requireDollarBeforejQueryAssignment": false
+  "requireDollarBeforejQueryAssignment": false,
+  "disallowTrailingWhitespace": false
 }

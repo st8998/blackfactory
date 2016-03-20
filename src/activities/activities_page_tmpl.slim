@@ -1,0 +1,45 @@
+.centered-container
+  .section-header
+    h3.section-header__title Activities
+  .section-body
+    ul.activities-tiles
+      li.activity-tile-container
+        .activity-tile.activity-tile--add-new ng-click="$ctrl.create()"
+          span.activity-tile__add-new-hint Create new Activity
+
+      li.activity-tile-container.flipping-card-container[
+        flipping-card
+        ng-repeat="card in $ctrl.activities track by card.id"
+      ]
+        .flipping-card
+          .activity-tile.flipping-card__front
+            span.button.button--remove.activity-tile__remove-button ng-click="$ctrl.remove(card)"
+
+            .activity-tile__avatar[ng-class="card.color | bgColor"]
+              span ng-bind="card.abbr"
+              span.button.button--white.button--small.button--eyedropper.flipping-card__flip-button
+
+            inline-edit.activity-tile__name[
+              type="text" placeholder="Activity name"
+              ng-model="card.name"
+              ng-change="$ctrl.update(card)"
+              ng-model-options="{ updateOn: 'blur' }"
+            ]
+            label.activity-tile__abbr[ inline-edit ]
+              input.input--text.inline-edit__input[
+                type="text" placeholder="Abbr"
+                ng-model="card.abbr"
+                ng-change="$ctrl.update(card)"
+                ng-model-options="{ updateOn: 'blur' }"
+              ]
+              span.inline-edit__input.activity-tile__abbr-hint 4 char max
+              span.inline-edit__view ng-bind="card.abbr || 'Abbr'"
+
+
+          .activity-tile.flipping-card__back
+            span.activity-tile__badge ng-class="card.color | bgColor" ng-bind="card.abbr"
+
+            .activity-tile__color-picker
+              color-picker ng-model="card.color" ng-change="$ctrl.update(card)"
+
+            span.button.button--small.button--white.flipping-card__flip-button Back

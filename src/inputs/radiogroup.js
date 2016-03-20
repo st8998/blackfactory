@@ -9,12 +9,13 @@ export default function register() {
       controller() {},
 
       compile(tEl) {
-        const name = randomStr(10)
         tEl.find('input[type="radio"]')
           .attr('radiogroup-radio', 'radiogroup-radio')
-          .attr('name', name)
 
         return function link(scope, el, attrs, [ngModel]) {
+          const name = randomStr(10)
+          el.find('input[type="radio"]').attr('name', name)
+
           ngModel.$render = function () {
             scope.$evalAsync(function () {
               scope.$broadcast('select-radio', ngModel.$viewValue)

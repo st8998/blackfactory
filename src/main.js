@@ -14,8 +14,9 @@ import registerInputs from 'inputs'
 
 import registerHeaderComponent from 'header/header'
 import registerHomeComponent from 'pages/home'
-import registerActivitiesPage from 'pages/activities_page'
 import registerGuidePage from 'pages/guide_page'
+
+import registerActivities from 'activities'
 
 import * as dates from 'misc/dates'
 
@@ -28,9 +29,10 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
 
   ::registerInputs()
 
+  ::registerActivities()
+  
   ::registerHeaderComponent()
   ::registerHomeComponent()
-  ::registerActivitiesPage()
   ::registerGuidePage()
 
 
