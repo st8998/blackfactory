@@ -1,8 +1,8 @@
-.centered-container
+.centered-container[ loader loader--value="$ctrl.activities" ]
   .section-header
     h3.section-header__title Activities
   .section-body
-    ul.activities-tiles
+    ul.activities-tiles[ prevent-initial-animation="$ctrl.activities" ]
       li.activity-tile-container
         .activity-tile.activity-tile--add-new ng-click="$ctrl.create()"
           span.activity-tile__add-new-hint Create new Activity

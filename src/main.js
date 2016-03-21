@@ -9,8 +9,10 @@ import registerCalendar from 'calendar/calendar'
 import registerRangeCalendar from 'range_calendar/range_calendar'
 import registerFlippingCard from 'flipping_card/flipping_card'
 import registerColorPicker from 'bg_colors/color_picker'
+import registerPreventInitialAnimation from 'misc/prevent_initial_animation'
 
 import registerInputs from 'inputs'
+import registerLoader from 'loader/loader'
 
 import registerHeaderComponent from 'header/header'
 import registerHomeComponent from 'pages/home'
@@ -26,8 +28,10 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerRangeCalendar()
   ::registerFlippingCard()
   ::registerColorPicker()
+  ::registerPreventInitialAnimation()
 
   ::registerInputs()
+  ::registerLoader()
 
   ::registerActivities()
   

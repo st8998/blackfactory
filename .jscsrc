@@ -4,5 +4,6 @@
   "maximumLineLength": 120,
   "requireTrailingComma": false,
   "requireDollarBeforejQueryAssignment": false,
-  "disallowTrailingWhitespace": false
+  "disallowTrailingWhitespace": false,
+  "requireDotNotation": false
 }

@@ -166,3 +166,22 @@
   background-image: svg-load('activities/add.svg', stroke: #d1d6da, fill: #d1d6da);
   margin-bottom: 20px;
 }
+
+/* ANIMATIONS */
+.activity-tile-container.ng-enter {
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+}
+.activity-tile-container.ng-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.activity-tile-container.ng-leave {
+  opacity: 1;
+  transition: opacity .3s;
+}
+.activity-tile-container.ng-leave-active {
+  opacity: 0;
+}
