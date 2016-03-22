@@ -1,8 +1,8 @@
 import './activities_page.css'
 import tmpl from './activities_page_tmpl.slim'
-import { loadActivities } from 'db'
 import * as activitiesActions from './activities_actions'
 import { clone } from 'ramda'
+const { floor, random } = Math
 
 function flowActivities(activities) {
   let x = 250
@@ -45,7 +45,7 @@ export default function register() {
     controller: /* @ngInject */ function ($scope, Store) {
       const ctrl = this
 
-      loadActivities(Store)
+      Store.dispatch(activitiesActions.request())
 
       Store.subscribe(function () {
         ctrl.cards = flowActivities(Store.getState().activities)
@@ -55,13 +55,13 @@ export default function register() {
       this.page.currentPage = 'activities'
 
       this.add = function () {
-        Store.dispatch(activitiesActions.add({ color: Math.floor(Math.random()*16) }))
+        Store.dispatch(activitiesActions.add({ color: floor(random() * 16) }, true))
       }
       this.remove = function (activity) {
-        Store.dispatch(activitiesActions.remove(activity))
+        Store.dispatch(activitiesActions.remove(activity, true))
       }
       this.update = function (activity) {
-        Store.dispatch(activitiesActions.update(activity))
+        Store.dispatch(activitiesActions.update(activity, true))
       }
     }
   })
