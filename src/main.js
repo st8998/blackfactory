@@ -20,6 +20,8 @@ import registerGuidePage from 'pages/guide_page'
 
 import registerActivities from 'activities'
 
+import reduxStore from 'redux_store'
+
 import * as dates from 'misc/dates'
 
 angular.module('markup', ['ngRoute', 'ngAnimate'])
@@ -39,6 +41,12 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerHomeComponent()
   ::registerGuidePage()
 
+  .constant('Store', reduxStore)
+  .run(/* @ngInject */ function ($rootScope, $timeout) {
+    reduxStore.subscribe(function () {
+      $timeout(::$rootScope.$digest)
+    })
+  })
 
   .run(function ($rootScope) {
     $rootScope.$watch(function () {
@@ -47,4 +55,3 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   })
 
   .run(function ($filter) { dates.format = $filter('date') })
-

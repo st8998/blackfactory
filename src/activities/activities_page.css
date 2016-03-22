@@ -1,14 +1,18 @@
 .activities-tiles {
+  position: relative;
   list-style: none;
   padding: 0;
   margin: -11px -11px;
 }
 
 .activity-tile-container {
+  position: absolute;
+  left: 0;
+  top: 0;
   margin: 11px;
   width: 228px;
   height: 228px;
-  float: left;
+  transition: transform .3s;
 }
 
 .activity-tile {
@@ -169,18 +173,16 @@
 
 /* ANIMATIONS */
 .activity-tile-container.ng-enter {
-  transform: translateX(-50%);
   opacity: 0;
-  transition: opacity .3s, transform .3s;
+  transition: opacity .3s;
 }
 .activity-tile-container.ng-enter-active {
-  transform: translateX(0);
   opacity: 1;
 }
 
 .activity-tile-container.ng-leave {
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity .2s;
 }
 .activity-tile-container.ng-leave-active {
   opacity: 0;

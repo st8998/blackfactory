@@ -9,8 +9,8 @@ export default function register() {
         el.addClass('loader__container')
         
         if (attrs['loaderValue']) {
-          const unbindWatch = scope.$watch(attrs['loaderValue'], function (n, o) {
-            if (n && n !== o) {
+          const unbindWatch = scope.$watch(attrs['loaderValue'], function (n) {
+            if (n) {
               el.removeClass('loader__container--loading')
               unbindWatch()
             } else {

@@ -1,15 +1,16 @@
-.centered-container[ loader loader--value="$ctrl.activities" ]
+.centered-container[ loader loader--value="$ctrl.cards" ]
   .section-header
     h3.section-header__title Activities
   .section-body
-    ul.activities-tiles[ prevent-initial-animation="$ctrl.activities" ]
+    ul.activities-tiles[ prevent-initial-animation="$ctrl.cards" ng-style="{ height: $ctrl.cardsHeight }" ]
       li.activity-tile-container
-        .activity-tile.activity-tile--add-new ng-click="$ctrl.create()"
+        .activity-tile.activity-tile--add-new ng-click="$ctrl.add()"
           span.activity-tile__add-new-hint Create new Activity
 
       li.activity-tile-container.flipping-card-container[
         flipping-card
-        ng-repeat="card in $ctrl.activities track by card.id"
+        ng-repeat="card in $ctrl.cards track by card.id"
+        ng-style="{ transform: 'translateX('+card.x+'px) translateY('+card.y+'px)' }"
       ]
         .flipping-card
           .activity-tile.flipping-card__front

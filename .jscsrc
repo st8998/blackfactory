@@ -5,5 +5,8 @@
   "requireTrailingComma": false,
   "requireDollarBeforejQueryAssignment": false,
   "disallowTrailingWhitespace": false,
-  "requireDotNotation": false
+  "requireDotNotation": false,
+  "safeContextKeyword": false,
+  "requirePaddingNewLinesBeforeLineComments": false,
+  "requirePaddingNewLinesAfterBlocks": false
 }

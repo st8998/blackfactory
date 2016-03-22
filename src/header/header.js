@@ -6,7 +6,7 @@ export default function initMenu() {
     $routeProvider.when('/', { template: '<home page="page"></home>' })
     $routeProvider.when('/activities', { template: '<activities-page page="page"></activities-page>' })
     $routeProvider.when('/guide', { template: '<guide-page page="page"></guide-page>' })
-    $routeProvider.otherwise({ redirectTo: '/' })
+    $routeProvider.otherwise({ redirectTo: '/activities' })
   })
   .run(function ($rootScope) {
     $rootScope.page = { }
