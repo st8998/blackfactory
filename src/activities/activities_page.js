@@ -1,8 +1,12 @@
 import './activities_page.css'
+import $ from 'jquery'
 import tmpl from './activities_page_tmpl.slim'
 import * as activitiesActions from './activities_actions'
 import { clone } from 'ramda'
+import { ActionCreators as undo } from 'redux-undo'
+
 const { floor, random } = Math
+
 
 function flowActivities(activities) {
   let x = 250
@@ -48,8 +52,18 @@ export default function register() {
       Store.dispatch(activitiesActions.request())
 
       Store.subscribe(function () {
-        ctrl.cards = flowActivities(Store.getState().activities)
+        ctrl.cards = flowActivities(Store.getState().activities.present)
         ctrl.cardsHeight = cardsHeight(ctrl.cards)
+      })
+
+      $(document).on('keypress', function (e) {
+        if (e.which === 26 && e.ctrlKey && e.shiftKey) {
+          Store.dispatch(undo.redo())
+          Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+        } else if (e.which === 26 && e.ctrlKey) {
+          Store.dispatch(undo.undo())
+          Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+        }
       })
 
       this.page.currentPage = 'activities'

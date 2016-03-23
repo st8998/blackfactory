@@ -1,7 +1,9 @@
+import undoable from 'redux-undo'
+
 import { prepend, reject, propEq } from 'ramda'
 import { updateBy } from 'ramda_ext'
 
-export default function reducer(state = [], action) {
+function reducer(state = [], action) {
   switch (action.type) {
     case 'ACTIVITIES.LOAD':
       return action.activities
@@ -15,3 +17,10 @@ export default function reducer(state = [], action) {
       return state
   }
 }
+
+export default undoable(reducer, {
+  initial: [],
+  filter: function filterActions(action) {
+    return !action.type.match(/LOAD|REQUEST/)
+  }
+})
