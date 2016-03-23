@@ -2,8 +2,10 @@ import './activities_page.css'
 import $ from 'jquery'
 import tmpl from './activities_page_tmpl.slim'
 import * as activitiesActions from './activities_actions'
-import { clone } from 'ramda'
+import { clone, pickAll } from 'ramda'
 import { ActionCreators as undo } from 'redux-undo'
+
+const sanitaize = pickAll(['id', 'color', 'name', 'abbr'])
 
 const { floor, random } = Math
 
@@ -75,7 +77,7 @@ export default function register() {
         Store.dispatch(activitiesActions.remove(activity, true))
       }
       this.update = function (activity) {
-        Store.dispatch(activitiesActions.update(activity, true))
+        Store.dispatch(activitiesActions.update(sanitaize(activity), true))
       }
     }
   })
