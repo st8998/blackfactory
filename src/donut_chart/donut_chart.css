@@ -1,0 +1,19 @@
+.donut-chart {
+  height: 30px;
+  width: 30px;
+  transform: rotate(-90deg);
+}
+
+.donut-chart__front {
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+}
+
+.donut-chart__back {
+  stroke: #e8eef1;
+}
+
+.donut-chart__front {
+  stroke: #00a9d4;
+  transition: stroke-dashoffset .3s;
+}

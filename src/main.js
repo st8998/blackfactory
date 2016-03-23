@@ -10,6 +10,7 @@ import registerRangeCalendar from 'range_calendar/range_calendar'
 import registerFlippingCard from 'flipping_card/flipping_card'
 import registerColorPicker from 'bg_colors/color_picker'
 import registerPreventInitialAnimation from 'misc/prevent_initial_animation'
+import registerDonutChart from 'donut_chart/donut_chart'
 
 import registerInputs from 'inputs'
 import registerLoader from 'loader/loader'
@@ -31,6 +32,7 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerFlippingCard()
   ::registerColorPicker()
   ::registerPreventInitialAnimation()
+  ::registerDonutChart()
 
   ::registerInputs()
   ::registerLoader()

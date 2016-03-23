@@ -1,5 +1,16 @@
-.centered-container
-  section ng-init="data = { }"
+.centered-container ng-init="data = { donutValue: 60 }"
+  section
+    .section-header
+      h3.section-header__title Donuts
+    .section-body
+      ul.color-picker[ radiogroup ng-model="data.donutValue" ]
+        li ng-repeat="n in [0, 20, 40, 60, 80, 100] track by n"
+          label
+            input type="radio" ng-value="::n"
+            span {{n}}
+      donut-chart value="data.donutValue"
+
+  section
     .section-header
       h3.section-header__title Dropdown Calendars
 
@@ -70,4 +81,3 @@
         label.inline-edit__view for="custom-inline-input"
           | $
           strong< ng-bind="x || 'Custom inline Edit'"
-
