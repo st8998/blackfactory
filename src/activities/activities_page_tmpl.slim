@@ -1,6 +1,11 @@
 .centered-container[ loader loader--value="$ctrl.cards" ]
   .section-header
     h3.section-header__title Activities
+    .section-buttons ng-if="$ctrl.pastSize + $ctrl.futureSize > 0"
+      .button__group
+        span.button.button--small ng-click="$ctrl.undo()" ng-disabled="$ctrl.pastSize === 0" Undo
+        span.button.button--small ng-click="$ctrl.redo()" ng-disabled="$ctrl.futureSize === 0" Redo
+
   .section-body
     ul.activities-tiles[ prevent-initial-animation="$ctrl.cards" ng-style="{ height: $ctrl.cardsHeight }" ]
       li.activity-tile-container

@@ -51,20 +51,31 @@ export default function register() {
     controller: /* @ngInject */ function ($scope, Store) {
       const ctrl = this
 
+      Store.dispatch({ type: '@@INIT' })
       Store.dispatch(activitiesActions.request())
 
       Store.subscribe(function () {
+        ctrl.pastSize = Store.getState().activities.past.length
+        ctrl.futureSize = Store.getState().activities.future.length
+
         ctrl.cards = flowActivities(Store.getState().activities.present)
         ctrl.cardsHeight = cardsHeight(ctrl.cards)
       })
 
+      this.undo = function () {
+        Store.dispatch(undo.undo())
+        Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+      }
+      this.redo = function () {
+        Store.dispatch(undo.redo())
+        Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+      }
+
       $(document).on('keypress', function (e) {
         if (e.which === 26 && e.ctrlKey && e.shiftKey) {
-          Store.dispatch(undo.redo())
-          Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+          ctrl.redo()
         } else if (e.which === 26 && e.ctrlKey) {
-          Store.dispatch(undo.undo())
-          Store.dispatch(activitiesActions.persist(Store.getState().activities.present))
+          ctrl.undo()
         }
       })
 
