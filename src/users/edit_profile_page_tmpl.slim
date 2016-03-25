@@ -1,8 +1,65 @@
 .centered-container[ loader loader--value="user" ]
   .profile-edit__avatar
     span.user__avatar.user__avatar--profile
-      img.user__avatar-pic ng-src="{{currentUser.avatar || (currentUser | buildAvatar)}}"
+      img.user__avatar-pic ng-src="{{user.avatar || (user | buildAvatar)}}"
     label.button.button--camera.edit-profile__avatar-pick
       input type="file"
 
-  span.button.edit-profile__save ng-click="update()" SAVE
+  .profile-edit__form
+    .profile__info-block
+      dl
+        dt: label Your Name
+        dd: input.input--text.input--big type="text" ng-model="user.name"
+
+        dt: label Job Title
+        dd: input.input--text.input--big type="text" ng-model="user.jobTitle"
+
+    .profile__info-block
+      h4 Contacts
+      dl
+        dt: label Phone
+        dd: input.input--text.input--big type="text" ng-model="user.phone"
+
+        dt: label Skype
+        dd: input.input--text.input--big type="text" ng-model="user.skype"
+
+        dt: label E-mail
+        dd: input.input--text.input--big type="text" ng-model="user.email"
+
+    .profile__info-block
+      h4
+        | Skills
+        span< as you'd rate them yourself
+      .profile-edit__info-list-hint Your Skills
+      ul.profile-edit__info-list
+        li.profile-edit__info-item ng-repeat="skill in user.skills track by $index"
+          input.input--text.input--big.profile-edit__skill-name type="text" ng-model="skill.name" placeholder="Skill Name"
+          input.input--text.input--big.profile-edit__skill-value type="number" min="0" max="5" ng-model="skill.level" placeholder="Skill Level"
+          donut-chart value="skill.level" max-value="5"
+          span.button.button--remove ng-click="removeFromCol(user.skills, skill)"
+        li.profile-edit__info-item
+          span.button.profile-edit__add-info-item ng-click="user.skills.push({})" Add
+
+    .profile__info-block
+      h4 Info
+      dl
+        dt: label Birth
+        dd: input.input--text.input--big type="text" ng-model="user.birthdate"
+
+        dt: label Hobby
+        dd: textarea.input--text.input--big rows="4" ng-model="user.hobby"
+
+    .profile__info-block
+      h4 Experience
+      .profile-edit__info-list-hint Experience
+      ul.profile-edit__info-list
+        li.profile-edit__info-item ng-repeat="exp in user.experience track by $index"
+          input.input--text.input--big.profile-edit__experience-name type="text" ng-model="exp.name" placeholder="Organization"
+          input.input--text.input--big.profile-edit__experience-date type="text" ng-model="exp.from" placeholder="Year since"
+          | —
+          input.input--text.input--big.profile-edit__experience-date type="text" ng-model="exp.to" placeholder="Year to"
+          span.button.button--remove ng-click="removeFromCol(user.experience, exp)"
+        li.profile-edit__info-item
+          span.button.profile-edit__add-info-item ng-click="user.experience.push({})" Add
+
+    span.button.edit-profile__save ng-click="update()" SAVE

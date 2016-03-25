@@ -28,13 +28,16 @@ export default function register() {
           })
         }
 
+        scope.removeFromCol = function (collection, item) {
+          collection.splice(collection.indexOf(item), 1)
+        }
+
         el.find('.edit-profile__avatar-pick input[type=file]').on('change', function () {
-          console.log('CHANGE')
           const reader = new FileReader()
 
           reader.addEventListener('load', function () {
             scope.user.avatar = thumbnailService.resize(reader.result, [135, 135])
-            Store.dispatch(userActions.update(scope.user))
+            scope.$digest()
           }, false)
 
           const file = document.querySelector('.edit-profile__avatar-pick input[type=file]').files[0]

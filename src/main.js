@@ -11,6 +11,7 @@ import registerFlippingCard from 'flipping_card/flipping_card'
 import registerColorPicker from 'bg_colors/color_picker'
 import registerPreventInitialAnimation from 'misc/prevent_initial_animation'
 import registerDonutChart from 'donut_chart/donut_chart'
+import registerPostfixFilter from 'misc/postfix_filter'
 
 import registerAvatar from 'avatar'
 import registerInputs from 'inputs'
@@ -38,6 +39,7 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerColorPicker()
   ::registerPreventInitialAnimation()
   ::registerDonutChart()
+  ::registerPostfixFilter()
 
   ::registerAvatar()
   ::registerInputs()

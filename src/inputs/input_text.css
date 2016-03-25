@@ -13,8 +13,18 @@
   transition: border-color .3s, box-shadow .3s, background .3s, background-color .3s;
 }
 
+textarea.input--text {
+  border-radius: 16px 16px 4px 16px;
+}
+
 .input--text:focus {
   border-color: #00aad8;
   box-shadow: 0 0 4px rgba(0, 170, 216, 0.2);
   outline: 0;
+}
+
+.input--big {
+  font-size: 14px;
+  line-height: 22px;
+  padding: 5px 14px;
 }

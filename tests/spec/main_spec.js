@@ -10,6 +10,7 @@ import 'spec/dropdown/dropdown_spec'
 import 'spec/inputs/radiogroup_spec'
 import 'spec/inputs/inline_edit_spec'
 import 'spec/activities/activities_service_spec'
+import 'spec/inputs/editable_list_spec'
 
 import toHaveSameDay from 'matchers/to_have_same_day'
 import toHaveClass from 'matchers/to_have_class'

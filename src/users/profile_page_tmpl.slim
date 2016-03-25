@@ -1,23 +1,23 @@
 .centered-container[ loader loader--value="user" ]
   .profile__avatar
     span.user__avatar.user__avatar--profile
-      img.user__avatar-pic ng-src="{{currentUser.avatar || (currentUser | buildAvatar)}}"
+      img.user__avatar-pic ng-src="{{user.avatar || (user | buildAvatar)}}"
 
   .profile__info
     .profile__info-header
       h3.profile__user-name
-        | Ivan Efremov
-        span Software Engineer
+        | {{user.name}}
+        span {{user.jobTitle}}
 
       a.button.button--small.profile__button-edit ng-href="#/profile/{{user.id}}/edit" Edit Profile
 
     ul.profile__contact-info
-      li.profile__contact.profile__contact--phone
-        a href="javascript:void()" +7-917-106-50-88
-      li.profile__contact.profile__contact--skype
-        a href="javascript:void()" ivan.efremov
-      li.profile__contact.profile__contact--email
-        a href="javascript:void()" st8998@gmail.com
+      li.profile__contact.profile__contact--phone ng-if="user.phone"
+        a href="tel:{{user.phone | phone}}" ng-bind="user.phone | phone"
+      li.profile__contact.profile__contact--skype ng-if="user.skype"
+        a ng-href="skype:{{user.skype}}" ng-bind="user.skype"
+      li.profile__contact.profile__contact--email ng-if="user.email"
+        a href="mailto:{{user.email}}" ng-bind="user.email"
 
     .profile__info-block ng-if="user.skills.length"
       h4 Skills
@@ -40,7 +40,7 @@
     .profile__info-block ng-if="user.experience.length"
       h4 Experience
       dl.profile__info-list
-        dt[ng-repeat-start="exp in user.experience track by $index"] {{exp.start}} — {{exp.end}}
+        dt[ng-repeat-start="exp in user.experience track by $index"] {{exp.from}} — {{exp.to}}
         dd[ng-repeat-end] {{exp.name}}
   ul.profile__stats
     li.profile__stat
@@ -56,6 +56,6 @@
 
   .profile__completed
     strong Profile Completed
-    em 67%
-    donut-chart value="67"
+    em ng-bind="user | profileScore | number | postfix:'%'"
+    donut-chart value="user | profileScore"
 
