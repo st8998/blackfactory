@@ -9,6 +9,8 @@
   cursor: pointer;
   user-select: none;
   text-align: center;
+  text-decoration: none;
+  color: #47515c;
 
   margin: 0;
   padding: 0 20px;
@@ -72,6 +74,11 @@
 .button--eyedropper {
   @mixin with-icon;
   background-image: svg-load('button/eyedropper.svg', fill: #a4acb5);
+}
+
+.button--camera {
+  @mixin with-icon;
+  background-image: svg-load('button/camera.svg', fill: #8b95a0);
 }
 
 .button--remove {

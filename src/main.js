@@ -12,6 +12,7 @@ import registerColorPicker from 'bg_colors/color_picker'
 import registerPreventInitialAnimation from 'misc/prevent_initial_animation'
 import registerDonutChart from 'donut_chart/donut_chart'
 
+import registerAvatar from 'avatar'
 import registerInputs from 'inputs'
 import registerLoader from 'loader/loader'
 
@@ -20,10 +21,14 @@ import registerHomeComponent from 'pages/home'
 import registerGuidePage from 'pages/guide_page'
 
 import registerActivities from 'activities'
+import registerUsers from 'users'
 
 import reduxStore from 'redux_store'
 
 import * as dates from 'misc/dates'
+import { find, propEq } from 'ramda'
+
+import { requestCurrent as requestCurrentUser } from 'users/users_actions'
 
 angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerDropdown()
@@ -34,10 +39,12 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
   ::registerPreventInitialAnimation()
   ::registerDonutChart()
 
+  ::registerAvatar()
   ::registerInputs()
   ::registerLoader()
 
   ::registerActivities()
+  ::registerUsers()
   
   ::registerHeaderComponent()
   ::registerHomeComponent()
@@ -50,10 +57,17 @@ angular.module('markup', ['ngRoute', 'ngAnimate'])
     })
   })
 
-  .run(function ($rootScope) {
+  .run(/* @ngInject */ function ($rootScope) {
     $rootScope.$watch(function () {
       console.log('ROOT DIGEST')
     })
   })
 
-  .run(function ($filter) { dates.format = $filter('date') })
+  .run(/* @ngInject */ function ($filter) { dates.format = $filter('date') })
+
+  .run(/* @ngInject */ function (Store, $rootScope) {
+    Store.dispatch(requestCurrentUser())
+    Store.subscribe(function () {
+      $rootScope.currentUser = find(propEq('current', 1), Store.getState().users.present)
+    })
+  })

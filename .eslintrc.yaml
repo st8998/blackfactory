@@ -21,6 +21,8 @@ rules:
   no-trailing-spaces: 0
   dot-notation: 0
   indent: 0
+  no-cond-assign: 0
+  prefer-template: 0
 
 env:
   es6: true

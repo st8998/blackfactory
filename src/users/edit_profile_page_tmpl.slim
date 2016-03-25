@@ -1,0 +1,8 @@
+.centered-container[ loader loader--value="user" ]
+  .profile-edit__avatar
+    span.user__avatar.user__avatar--profile
+      img.user__avatar-pic ng-src="{{currentUser.avatar || (currentUser | buildAvatar)}}"
+    label.button.button--camera.edit-profile__avatar-pick
+      input type="file"
+
+  span.button.edit-profile__save ng-click="update()" SAVE

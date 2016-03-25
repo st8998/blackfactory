@@ -2,6 +2,7 @@
   height: 30px;
   width: 30px;
   transform: rotate(-90deg);
+  stroke-width: 15%;
 }
 
 .donut-chart__front {

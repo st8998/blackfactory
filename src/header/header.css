@@ -62,3 +62,8 @@
   height: 3px;
   margin-top: -17px;
 }
+
+.header__user {
+  float: right;
+  margin: 22px 25px 15px 0;
+}

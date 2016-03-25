@@ -1,8 +1,5 @@
-import Dexie from 'dexie'
+import db from 'db'
 import { prop, eqBy, differenceWith, intersectionWith } from 'ramda'
-
-const db = new Dexie('db')
-db.version(1).stores({ activities: '++id, color, name, abbr' })
 
 export const load = activities => ({ type: 'ACTIVITIES.LOAD', activities })
 
@@ -18,11 +15,11 @@ export const add = (activity = { }, persist) => dispatch =>
     }) : Promise.resolve(dispatch({ type: 'ACTIVITIES.ADD', activity }))
     
 export const remove = (activity, persist) => dispatch =>
-  persist ? db.activities.delete(activity.id).then(dispatch(remove(activity))) : 
+  persist ? db.activities.delete(activity.id).then(dispatch.bind(null, remove(activity))) : 
     Promise.resolve(dispatch({ type: 'ACTIVITIES.REMOVE', activity }))
 
 export const update = (activity, persist) => dispatch =>
-  persist ? db.transaction('rw', db.activities, () => db.activities.put(activity)).then(dispatch(update(activity))) :
+  persist ? db.transaction('rw', db.activities, () => db.activities.put(activity)).then(dispatch.bind(null, update(activity))) :
     Promise.resolve(dispatch({ type: 'ACTIVITIES.UPDATE', activity }))
 
 export const persist = activities => dispatch =>

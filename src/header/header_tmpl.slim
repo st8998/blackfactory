@@ -3,9 +3,14 @@
     a href="#/" title="Markup Project" Markup Project
 
   ul.header__menu
-    li.header__menu-item ng-class="{'header__menu-item--active': $ctrl.page.currentPage == 'home'}"
+    li.header__menu-item ng-class="{'header__menu-item--active': page.currentPage == 'home'}"
       a href="#/" ROOT
-    li.header__menu-item ng-class="{'header__menu-item--active': $ctrl.page.currentPage == 'activities'}"
+    li.header__menu-item ng-class="{'header__menu-item--active': page.currentPage == 'activities'}"
       a href="#/activities" ACTIVITIES
-    li.header__menu-item ng-class="{'header__menu-item--active': $ctrl.page.currentPage == 'guide'}"
+    li.header__menu-item ng-class="{'header__menu-item--active': page.currentPage == 'guide'}"
       a href="#/guide" Guide
+
+  .header__user
+    span.user__avatar
+      a ng-href="#/profile/{{::currentUser.id}}"
+        img.user__avatar-pic ng-src="{{currentUser.avatar || (currentUser | buildAvatar)}}"

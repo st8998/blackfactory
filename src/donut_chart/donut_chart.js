@@ -9,8 +9,10 @@ export default function register() {
       replace: true,
       
       link: function (scope, el, attrs) {
-        scope.$watch(attrs['value'], function (percentage) {
-          el.find('.donut-chart__front').css('stroke-dashoffset', String(440 + 12 - Number(percentage) * 4.4))
+        const maxValue = Number(attrs['maxValue']) || 100
+
+        scope.$watch(attrs['value'], function (value) {
+          el.find('.donut-chart__front').css('stroke-dashoffset', String(440 + 12 - Number(value) * 440 / maxValue))
         })
       }
     }

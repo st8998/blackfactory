@@ -56,6 +56,7 @@
     "postcss-mixins": "^4.0.1",
     "postcss-nested": "^1.0.0",
     "protractor": "^3.1.0",
+    "raw-loader": "^0.5.1",
     "slm-loader": "^0.1.1",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9"
