@@ -8,6 +8,7 @@ export default function initMenu() {
     $routeProvider.when('/guide', { template: '<guide-page page="page"></guide-page>' })
     $routeProvider.when('/profile/:userId', { template: '<profile-page></profile-page>' })
     $routeProvider.when('/profile/:userId/edit', { template: '<edit-profile-page></edit-profile-page>' })
+    $routeProvider.when('/team', { template: '<team-page></team-page>' })
     $routeProvider.otherwise({ redirectTo: '/activities' })
   })
   .run(/* @ngInject */ function ($rootScope) {
