@@ -1,1 +1,15 @@
-h1 TEAM
+table.team[ loader loader--value="users" ]
+  thead.team-header
+    tr
+      th.team-header__activity Activity
+      th.team-header__name Name
+      th.team-header__email Email
+      th.team-header__phone Phone
+      th.team-header__skills Skillsd
+  tbody
+    tr ng-repeat="user in users track by user.id"
+      td
+      td {{user.name}}
+      td {{user.email}}
+      td {{user.phone | phone}}
+      td
