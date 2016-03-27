@@ -47,10 +47,10 @@ gulp.task('slim-watch', ['slim'], function () {
 // WEBPACK CONFIG
 const config = {
   entry: {
-    vendor: ['dexie', 'jquery', 'angular', 'angular-route', 'angular-animate', 'instadate', 'ramda', 'zone.js', 'virtual-dom'],
+    vendor: ['dexie', 'instadate', 'ramda'],
     main: './src/main.js',
-    spec: './tests/spec/main_spec.js',
-    e2e: './tests/e2e/main_e2e.js'
+    // spec: './tests/spec/main_spec.js',
+    // e2e: './tests/e2e/main_e2e.js'
   },
   target: 'web',
   devtool: '#inline-source-map',
@@ -60,7 +60,6 @@ const config = {
   },
   module: {
     loaders: [
-      { loader: 'ng-annotate', test: /\.js$/, exclude: /node_modules/ },
       { loaders: ['html', 'slm'], test: /\.(slm|slim)$/, exclude: /node_modules/ },
       {
         loader: 'style-loader!css-loader!postcss-loader',
@@ -73,10 +72,6 @@ const config = {
           plugins: ['transform-runtime'],
           presets: ['stage-0', 'es2015'],
         },
-      },
-      {
-        test: /jquery\.js$/,
-        loader: 'expose?jQuery',
       },
     ],
   },
