@@ -47,7 +47,7 @@ export function Header({ user }) {
 )
 export default class CurrentUserHeader extends Component {
   componentDidMount() {
-    this.props.requestCurrentUser()
+    if (!this.props.currentUser) this.props.requestCurrentUser()
   }
 
   render() {

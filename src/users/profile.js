@@ -105,7 +105,7 @@ const Profile = function ({ user }) {
 )
 export default class UserProfile extends Component {
   componentDidMount() {
-    this.props.requestUser(this.props.params.id)
+    if (!this.props.user) this.props.requestUser(this.props.params.id)
   }
 
   render() {
