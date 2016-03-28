@@ -64,6 +64,14 @@
 }
 
 .header__user {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fefefe, 0 0 0 3px #e2e4e7;
   float: right;
   margin: 22px 25px 15px 0;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
 }
+
+.header__avatar-appear { opacity: 0; }
+.header__avatar-appear-active { opacity: 1; transition: opacity .5s ease-out; }

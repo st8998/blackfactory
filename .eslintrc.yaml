@@ -23,6 +23,7 @@ rules:
   indent: 0
   no-cond-assign: 0
   prefer-template: 0
+  no-unused-vars: 0
 
 env:
   es6: true

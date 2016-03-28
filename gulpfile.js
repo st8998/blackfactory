@@ -47,7 +47,9 @@ gulp.task('slim-watch', ['slim'], function () {
 // WEBPACK CONFIG
 const config = {
   entry: {
-    vendor: ['dexie', 'instadate', 'ramda'],
+    vendor: ['dexie', 'instadate', 'ramda', 
+             'react', 'react-dom', 'react-router', 'react-redux', 'redux', 'reselect',
+             'react-addons-css-transition-group'],
     main: './src/main.js',
     // spec: './tests/spec/main_spec.js',
     // e2e: './tests/e2e/main_e2e.js'
@@ -69,8 +71,8 @@ const config = {
         loader: 'babel-loader',
         test: /\.js$/, exclude: /node_modules/,
         query: {
-          plugins: ['transform-runtime'],
-          presets: ['stage-0', 'es2015'],
+          plugins: ['transform-runtime', 'transform-decorators-legacy'],
+          presets: ['react', 'stage-0', 'es2015'],
         },
       },
     ],

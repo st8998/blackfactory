@@ -1,0 +1,25 @@
+.loader {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.loader::before {
+  content: '';
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -15px 0 0 -15px;
+  width: 30px;
+  height: 30px;
+  background-image: svg-load('loader/loader.svg', fill: #ccd3d9);
+  background-repeat: no-repeat;
+}
+
+.loader-appear, .loader-enter { opacity: 0 }
+.loader-appear-active, .loader-enter-active { opacity: 1; transition: opacity .2s }
+
+.loader-leave { opacity: 1 }
+.loader-leave-active { opacity: 0; transition: opacity .2s }
