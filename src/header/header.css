@@ -70,7 +70,12 @@
   margin: 22px 25px 15px 0;
   width: 30px;
   height: 30px;
-  overflow: hidden;
+}
+
+.header__user .loader::before {
+  height: 26px;
+  width: 26px;
+  margin: -13px 0 0 -13px;
 }
 
 .header__avatar-appear { opacity: 0; }

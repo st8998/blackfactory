@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import usersReducer from 'users/users_reducer'
 
 import Header from 'header/header'
+import Profile from 'users/profile'
 
 const reducer = combineReducers({ users: usersReducer })
 const middleware = applyMiddleware(thunk)
@@ -29,6 +30,7 @@ render((
   <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
+        <Route path="/profile/:id" component={ Profile }></Route>
       </Route>
     </Router>
   </Provider>

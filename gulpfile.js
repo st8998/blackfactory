@@ -49,7 +49,7 @@ const config = {
   entry: {
     vendor: ['dexie', 'instadate', 'ramda', 
              'react', 'react-dom', 'react-router', 'react-redux', 'redux', 'reselect',
-             'react-addons-css-transition-group'],
+             'react-addons-css-transition-group', 'classnames'],
     main: './src/main.js',
     // spec: './tests/spec/main_spec.js',
     // e2e: './tests/e2e/main_e2e.js'
