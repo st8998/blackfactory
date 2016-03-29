@@ -14,3 +14,8 @@ db.version(2).stores({
 db.open()
 
 export default db
+
+export function assertFound(model) {
+  console.log('ASSERT', model)
+  return model || Promise.reject('Not found')
+}

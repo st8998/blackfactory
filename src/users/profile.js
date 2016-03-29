@@ -9,6 +9,7 @@ import { request as requestUser } from './users_actions'
 
 import { Link } from 'react-router'
 import DonutChart from 'donut_chart/donut_chart'
+import Stub from 'misc/stub'
 import Loader from 'loader/loader'
 import Avatar from 'avatar/avatar'
 import ProfileCompleted from './profile_completed'
@@ -17,6 +18,8 @@ import SkypeLink from './skype_link'
 import MailtoLink from './mailto_link'
 
 const Info = function ({ birthday, hobby }) {
+  if (!birthday && !hobby) return <Stub />
+
   const infoNodes = []
   if (birthday) infoNodes.push([<dt>date of birth</dt>, <dd>{birthday}</dd>])
   if (hobby) infoNodes.push([<dt>Hobby</dt>, <dd>{hobby}</dd>])
@@ -30,7 +33,7 @@ const Info = function ({ birthday, hobby }) {
 }
 
 const Experience = function ({ experience }) {
-  if (!experience) return <span></span>
+  if (!experience) return <Stub />
 
   const experienceNodes = map(exp => [<dt>{`${exp.from} — ${exp.to}`}</dt>, <dd>{exp.name}</dd>])
 
@@ -43,7 +46,7 @@ const Experience = function ({ experience }) {
 }
 
 const Skills = function ({ skills }) {
-  if (!skills) return <span></span>
+  if (!skills) return <Stub />
 
   const extendedSkills = skills.concat(times(() => ({}), (4 - (skills.length % 4)) % 4))
 
@@ -62,6 +65,18 @@ const Skills = function ({ skills }) {
   )
 }
 
+const Contacts = function ({ phone, skype, email }) {
+  if (!phone && !skype && !email) return <Stub />
+
+  return (
+    <ul className="profile__contact-info">
+      <li className="profile__contact profile__contact--phone"><TelLink tel={phone}/></li>
+      <li className="profile__contact profile__contact--skype"><SkypeLink skypeName={skype}/></li>
+      <li className="profile__contact profile__contact--email"><MailtoLink address={email}/></li>
+    </ul>
+  )
+}
+
 const Profile = function ({ user }) {
   if (!user) return <div className="centered-container"><Loader></Loader></div>
 
@@ -73,15 +88,9 @@ const Profile = function ({ user }) {
           <h3 className="profile__user-name">
             { user.name }<span className="profile__user-job-title">{user.jobTitle}</span>
           </h3>
-          <Link to={`/profile/${user.id}/edit`} className="button button--small profile__button-edit">
-            Edit Profile
-          </Link>
+          <Link to={`/profile/${user.id}/edit`} className="button button--small profile__button-edit">Edit Profile</Link>
         </div>
-        <ul className="profile__contact-info">
-          <li className="profile__contact profile__contact--phone"><TelLink tel={user.phone}/></li>
-          <li className="profile__contact profile__contact--skype"><SkypeLink skypeName={user.skype}/></li>
-          <li className="profile__contact profile__contact--email"><MailtoLink address={user.email}/></li>
-        </ul>
+        <Contacts {...user} />
         <Skills skills={user.skills} />
         <Info {...user} />
         <Experience experience={user.experience} />
@@ -104,8 +113,21 @@ const Profile = function ({ user }) {
   { requestUser }
 )
 export default class UserProfile extends Component {
-  componentDidMount() {
-    if (!this.props.user) this.props.requestUser(this.props.params.id)
+  static contextTypes = {
+    router: React.PropTypes.object
+  };
+
+  assertUser(id) {
+    this.props.requestUser(id)
+      .catch(() => this.context.router.replace('/notfound'))
+  }
+
+  componentWillMount() {
+    if (!this.props.user) this.assertUser(this.props.params.id)
+  }
+
+  componentWillReceiveProps(props) {
+    if (!props.user) this.assertUser(props.params.id)
   }
 
   render() {

@@ -14,7 +14,7 @@ const WEIGHTS = {
 }
 
 const CHECKS = values(mapObjIndexed((check, key) => (user) => check(user) ? WEIGHTS[key] : 0)({
-  name: user => user.email.indexOf(user.name) && user.name.length > 7,
+  name: user => user.email && user.name && user.email.indexOf(user.name) && user.name.length > 7,
   jobTitle: user => !!user.jobTitle,
   avatar: user => !!user.avatar,
   phone: user => !!(user.phone || '').match(/\d/),
@@ -26,7 +26,7 @@ const CHECKS = values(mapObjIndexed((check, key) => (user) => check(user) ? WEIG
 
 export default function ProfileCmpleted({ user }) {
   const completed = reduce((score, check) => score + check(user), 0, CHECKS)
-  
+
   return (
     <div className="profile__completed">
       <strong>Profile Completed</strong>

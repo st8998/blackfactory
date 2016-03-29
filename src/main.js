@@ -3,7 +3,7 @@ import './main.css'
 import React from 'react'
 import { Provider, connect } from 'react-redux'
 import { render } from 'react-dom'
-import { Link, Router, Route, hashHistory } from 'react-router'
+import { Link, Router, Route, Redirect, hashHistory } from 'react-router'
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
@@ -26,11 +26,15 @@ const App = ({ children }) => (
   </div>
 )
 
+const NotFound = () => <div className="centered-container"><h1>NOT FOUND</h1></div>
+
 render((
   <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <Route path="/profile/:id" component={ Profile }></Route>
+        <Route path="/notfound" component={NotFound}></Route>
+        <Redirect from="/**" to="/notfound"></Redirect>
       </Route>
     </Router>
   </Provider>

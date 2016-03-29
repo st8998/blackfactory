@@ -1,4 +1,4 @@
-import db from 'db'
+import db, { assertFound } from 'db'
 import { } from 'ramda'
 import delay from 'misc/delay'
 
@@ -15,4 +15,7 @@ export const requestCurrent = () => dispatch =>
   ).catch(::console.log))
 
 export const request = id => dispatch =>
-  delay(500).then(() => db.users.get(Number(id)).then(user => dispatch(add(user))).catch(::console.log))
+  delay(500).then(() => db.users.get(Number(id)).then(assertFound).then(user => {
+    console.log('THEN', user)
+    return dispatch(add(user))
+  }))
