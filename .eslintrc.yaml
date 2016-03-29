@@ -24,6 +24,7 @@ rules:
   no-cond-assign: 0
   prefer-template: 0
   no-unused-vars: 0
+  new-cap: 0
 
 env:
   es6: true

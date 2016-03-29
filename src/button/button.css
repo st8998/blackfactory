@@ -19,14 +19,6 @@
   background-repeat: no-repeat;
 }
 
-.button[disabled="disabled"] {
-  pointer-events: none;
-  box-shadow: none;
-  background-color: transparent;
-  opacity: 0.7;
-  color: #747e8a;
-}
-
 @define-mixin with-icon {
   background-position: 10px 6px;
   padding-left: 32px;
@@ -106,6 +98,21 @@
   height: 20px;
   min-width: 20px;
   background-size: 10px 10px;
+}
+
+.button--loading {
+  background-position: 6px 4px;
+  background-size: 16px 16px;
+
+  background-image: svg-load('loader/loader.svg', fill: #ccd3d9);
+}
+
+.button[disabled="disabled"], .button--loading {
+  pointer-events: none;
+  box-shadow: none;
+  background-color: transparent;
+  opacity: 0.7;
+  color: #747e8a;
 }
 
 .button__group .button {

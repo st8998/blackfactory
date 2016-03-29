@@ -16,6 +16,10 @@ export const requestCurrent = () => dispatch =>
 
 export const request = id => dispatch =>
   delay(500).then(() => db.users.get(Number(id)).then(assertFound).then(user => {
-    console.log('THEN', user)
     return dispatch(add(user))
   }))
+
+export const update = (id, attrs, persist) => dispatch =>
+  persist ? delay(500).then(() => db.transaction('rw', db.users, () => db.users.update(id, attrs))
+    .then(dispatch.bind(null, update(id, attrs)))) :
+    Promise.resolve(dispatch({ type: 'USERS.UPDATE', id, attrs }))

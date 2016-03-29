@@ -1,3 +1,5 @@
+import 'inputs/input_text.css'
+import 'button/button.css'
 import './main.css'
 
 import React from 'react'
@@ -12,6 +14,7 @@ import usersReducer from 'users/users_reducer'
 
 import Header from 'header/header'
 import Profile from 'users/profile'
+import ProfileEdit from 'users/profile_edit'
 
 const reducer = combineReducers({ users: usersReducer })
 const middleware = applyMiddleware(thunk)
@@ -33,6 +36,7 @@ render((
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <Route path="/profile/:id" component={ Profile }></Route>
+        <Route path="/profile/:id/edit" component={ ProfileEdit }></Route>
         <Route path="/notfound" component={NotFound}></Route>
         <Redirect from="/**" to="/notfound"></Redirect>
       </Route>

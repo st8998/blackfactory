@@ -180,7 +180,7 @@
   margin: 0;
   border-bottom: solid 1px #e2e4e7;
 }
-.profile__info-block h4 span {
+.profile__info-block h4 span:last-child {
   color: #a2aab2;
   font-weight: 300;
 }
@@ -247,4 +247,135 @@
   display: inline-block;
   margin-bottom: 10px;
   float: left;
+}
+
+/* PROFILE EDIT */
+.profile-edit__avatar {
+  width: 135px;
+  height: 135px;
+  margin: 0 auto;
+  box-shadow: 0 0 0 5px #f8f9fa, 0 0 0 6px #e2e4e7;
+  border-radius: 50%;
+  position: relative;
+}
+
+.edit-profile__avatar-pick {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin: 0 0 -13px -13px;
+  padding: 0;
+  background-position: center;
+}
+.edit-profile__avatar-pick input[type="file"] {
+  position: absolute;
+  left: -9000px;
+}
+.profile-edit__avatar::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 32px;
+  height: 32px;
+  bottom: 0;
+  left: 50%;
+  margin: 0 0 -16px -16px;
+  border-radius: 50%;
+  background-color: #f6f7f8;
+}
+
+.profile-edit__form {
+  width: 586px;
+  margin: 0 auto;
+}
+
+.edit-profile__save {
+  width: 100px;
+  display: block;
+  margin: 50px auto;
+}
+
+.profile-edit__form dt {
+  width: 16%;
+  color: #8896a2;
+  font-size: 14px;
+  line-height: 34px;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding-right: 15px;
+  clear: left;
+  float: left;
+  vertical-align: middle;
+}
+.profile-edit__form dd {
+  width: 84%;
+  display: block;
+  margin: 0 0 15px 0;
+  float: left;
+}
+
+.profile-edit__info-list {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  float: left;
+  width: 84%;
+  margin: 0;
+}
+.profile-edit__info-list-hint {
+  margin-top: 14px;
+  display: inline-block;
+  width: 16%;
+  float: left;
+  line-height: 34px;
+  color: #747e8a;
+  vertical-align: center;
+}
+.profile-edit__info-list::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 0;
+  width: 1px;
+  background: #e2e4e7;
+}
+
+.profile-edit__info-item {
+  position: relative;
+  padding-left: 10px;
+  margin: 15px 0;
+}
+.profile-edit__skill-name {
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+}
+.profile-edit__skill-value {
+  display: inline-block;
+  margin-right: 10px;
+  width: 132px;
+}
+.profile-edit__info-item .donut-chart {
+  vertical-align: middle;
+}
+.profile-edit__info-item .button--remove {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin: -8px -28px 0 0;
+}
+.profile-edit__add-info-item {
+  margin-top: 2px;
+}
+
+.profile-edit__experience-name {
+  display: inline-block;
+  width: 220px;
+  margin-right: 10px;
+}
+.profile-edit__experience-date {
+  display: inline-block;
+  width: 115px;
 }

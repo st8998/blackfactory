@@ -17,11 +17,11 @@ import TelLink from './tel_link'
 import SkypeLink from './skype_link'
 import MailtoLink from './mailto_link'
 
-const Info = function ({ birthday, hobby }) {
-  if (!birthday && !hobby) return <Stub />
+const Info = function ({ birthdate, hobby }) {
+  if (!birthdate && !hobby) return <Stub />
 
   const infoNodes = []
-  if (birthday) infoNodes.push([<dt>date of birth</dt>, <dd>{birthday}</dd>])
+  if (birthdate) infoNodes.push([<dt>date of birth</dt>, <dd>{birthdate}</dd>])
   if (hobby) infoNodes.push([<dt>Hobby</dt>, <dd>{hobby}</dd>])
 
   return (
@@ -46,7 +46,7 @@ const Experience = function ({ experience }) {
 }
 
 const Skills = function ({ skills }) {
-  if (!skills) return <Stub />
+  if (!skills || !skills.length) return <Stub />
 
   const extendedSkills = skills.concat(times(() => ({}), (4 - (skills.length % 4)) % 4))
 
