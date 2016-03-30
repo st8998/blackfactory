@@ -1,17 +1,18 @@
-import './users.css'
+import 'users/users.css'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
 
 import { find, propEq, map, times } from 'ramda'
 
-import { request as requestUser } from './users_actions'
+import { request as requestUser } from 'users/users_actions'
 
 import { Link } from 'react-router'
 import DonutChart from 'donut_chart/donut_chart'
 import Stub from 'misc/stub'
 import Loader from 'loader/loader'
 import Avatar from 'avatar/avatar'
+
 import ProfileCompleted from './profile_completed'
 import TelLink from './tel_link'
 import SkypeLink from './skype_link'

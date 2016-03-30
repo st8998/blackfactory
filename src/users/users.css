@@ -139,7 +139,7 @@
   background-position: 0;
 }
 .profile__contact a {
-  background-image: svg-load('users/external.svg', fill: #8b95a0);
+  background-image: svg-load('users/profile/external.svg', fill: #8b95a0);
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: 11px 11px;
@@ -149,13 +149,13 @@
   text-decoration: none;
 }
 .profile__contact--skype {
-  background-image: svg-load('users/skype.svg', fill: #cdd2d8);
+  background-image: svg-load('users/profile/skype.svg', fill: #cdd2d8);
 }
 .profile__contact--email {
-  background-image: svg-load('users/email.svg', fill: #cdd2d8);
+  background-image: svg-load('users/profile/email.svg', fill: #cdd2d8);
 }
 .profile__contact--phone {
-  background-image: svg-load('users/phone.svg', fill: #cdd2d8);
+  background-image: svg-load('users/profile/phone.svg', fill: #cdd2d8);
   background-size: 14px 13px;
 }
 
