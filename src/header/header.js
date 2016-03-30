@@ -18,6 +18,13 @@ const currentUserSelector = createSelector(
   )
 )
 
+const getRouter = state => state.router
+
+const headerSelector = createSelector(
+  [currentUserSelector, getRouter],
+  (currentUser, router) => currentUser
+)
+
 export function Header({ user }) {
   const avatar = user ? (
     <Link to={ `/profile/${user.id}` }>
@@ -29,10 +36,10 @@ export function Header({ user }) {
   return (
     <div className="header">
       <h1 className="header__logo">
-        <Link to="/" title="Markup Project">Markup Project</Link>
+        <Link to="/" activeClassName="active" title="Markup Project">Markup Project</Link>
       </h1>
       <ul className="header__menu">
-
+        <li className="header__menu-item"><Link to="/team" activeClassName="active">Team</Link></li>
       </ul>
       <div className="header__user">
         { avatar }
@@ -42,7 +49,7 @@ export function Header({ user }) {
 }
 
 @connect(
-  currentUserSelector,
+  headerSelector,
   { requestCurrentUser }
 )
 export default class CurrentUserHeader extends Component {

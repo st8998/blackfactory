@@ -10,7 +10,7 @@ const mapIndexed = addIndex(map)
 class ProfileEditExperience extends Component {
   render() {
     const experienceNodes = mapIndexed((experience, idx) => (
-      <li className="profile-edit__info-item">
+      <li className="profile-edit__info-item" key={idx}>
         <Input type="text" select={[idx, 'name']} className="input--text input--big profile-edit__experience-name" />
         <Input type="text" select={[idx, 'from']} className="input--text input--big profile-edit__experience-date" />
         <span> — </span>

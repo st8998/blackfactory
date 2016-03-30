@@ -11,7 +11,7 @@ const mapIndexed = addIndex(map)
 class ProfileEditSkills extends Component {
   render() {
     const skillNodes = mapIndexed((skill, idx) => (
-      <li className="profile-edit__info-item">
+      <li className="profile-edit__info-item" key={idx}>
         <Input select={[idx, 'name']} type="text" className="input--text input--big profile-edit__skill-name" />
         <Input select={[idx, 'level']} type="number" max="5" min="0" className="input--text input--big profile-edit__skill-value" />
         <DonutChart maxValue={5} value={Number(skill.level)} />

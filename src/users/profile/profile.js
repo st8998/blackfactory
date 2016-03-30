@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
 
-import { find, propEq, map, times } from 'ramda'
+import { find, propEq, map, times, addIndex } from 'ramda'
 
 import { request as requestUser } from 'users/users_actions'
 
@@ -51,8 +51,8 @@ const Skills = function ({ skills }) {
 
   const extendedSkills = skills.concat(times(() => ({}), (4 - (skills.length % 4)) % 4))
 
-  const skillNodes = map(skill =>
-    <li className={ cn('profile__skill', { 'profile__skill--placeholder': !skill.level }) }>
+  const skillNodes = addIndex(map)((skill, idx) =>
+    <li className={ cn('profile__skill', { 'profile__skill--placeholder': !skill.level }) } key={idx}>
       <DonutChart maxValue={5} value={skill.level}/>
       <span>{skill.name || 'Empty'}</span>
     </li>

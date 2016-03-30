@@ -1,6 +1,12 @@
 import db, { assertFound } from 'db'
-import { } from 'ramda'
+import { always } from 'ramda'
 import delay from 'misc/delay'
+
+function callOnce(onceFunc, alwaysFunc = always()) {
+  let called = 0
+
+  return (...args) => called > 0 ? alwaysFunc() : ++called && onceFunc.apply(null, args)
+}
 
 export const add = (user = { }, persist) => dispatch =>
   persist ? db.users.add(user)
@@ -15,9 +21,13 @@ export const requestCurrent = () => dispatch =>
   ).catch(::console.log))
 
 export const request = id => dispatch =>
-  delay(500).then(() => db.users.get(Number(id)).then(assertFound).then(user => {
-    return dispatch(add(user))
-  }))
+  delay(500).then(() => db.users.get(Number(id)).then(assertFound).then(user => dispatch(add(user))))
+
+export const requestAll = callOnce(
+  () => dispatch =>
+    delay(500).then(() => db.users.toArray().then(users => dispatch(add(users)))),
+  () => dispatch => Promise.resolve(null)
+)
 
 export const update = (id, attrs, persist) => dispatch =>
   persist ? delay(500).then(() => db.transaction('rw', db.users, () => db.users.update(id, attrs))

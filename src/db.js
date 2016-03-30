@@ -8,7 +8,7 @@ db.version(1).stores({
 
 db.version(2).stores({
   activities: '++id, color, name, abbr',
-  users: '++id, *current, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
+  users: '++id, *current, archived, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
 })
 
 db.open()

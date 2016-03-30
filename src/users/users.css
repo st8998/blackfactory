@@ -379,3 +379,139 @@
   display: inline-block;
   width: 115px;
 }
+
+/* TEAM */
+.team {
+  width: 100%;
+  border-collapse: separate;
+  table-layout: fixed;
+  border-spacing: 0;
+}
+
+.team-header {
+  margin: 0;
+  padding: 0;
+}
+
+.team-header th {
+  color: #747e8a;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: normal;
+  border-bottom: solid 1px #fefefe;
+  padding: 10px 12px;
+  text-align: left;
+  box-shadow: inset 0 -1px 0 #e7e9ec;
+}
+
+.team-header__activity { width: 120px; }
+.team-header__name { width: 20%; }
+.team-header__email { width: 20%; }
+.team-header__phone { width: 120px; }
+.team-header__skills { width: 20%; }
+.team-header__controll { width: 45px; }
+
+.team td:nth-child(4) {
+  text-align: right;
+}
+
+.team .avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.team a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.team td {
+  padding: 7px 12px;
+  background: #f8f9fa;
+  border-top: solid 1px transparent;
+  border-bottom: solid 1px transparent;
+}
+
+.team .team__user-actions {
+  float: right;
+  margin-right: 10px;
+  visibility: hidden;
+}
+
+.team td:empty::after {
+  content: "—";
+  color: #cedbe2;
+}
+
+.team tr:hover td {
+  background: #fbfcfc;
+  border-top-color: #e2e4e7;
+  border-bottom-color: #e2e4e7;
+}
+.team tr:hover:first-child td {
+  border-top-color: transparent;
+}
+.team tr:hover .team__user-actions {
+  visibility: visible;
+}
+.team__skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team__skill {
+  position: relative;
+}
+.team__skill .donut-chart {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  vertical-align: middle;
+}
+.team__skill>span {
+  margin-left: 10px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.team__skill--placeholder>span {
+  color: #cedbe2;
+}
+.team__skill--more>span {
+  color: #47515c;
+}
+.team__skill--more::before {
+  content: "+";
+  color: #8896a2;
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  border: 1px dashed #8b959e;
+  font-size: 13px;
+  line-height: 13px;
+}
+
+.team__filters {
+  display: inline-block;
+  margin-right: 20px;
+}
+.team__filter {
+  color: #747e8a;
+  border-right: 1px solid #d5dbe2;
+  margin-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.team__filter:last-child { border-right: none; }
+
+.team__filter:hover,
+.team__filter.team__filter--active {
+  color: #2f3137;
+}
