@@ -40,6 +40,7 @@
 }
 
 .button.button--borderless {
+  background-color: transparent;
   box-shadow: none;
   border: none;
   opacity: .6;

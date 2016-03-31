@@ -26,6 +26,7 @@ rules:
   no-unused-vars: 0
   new-cap: 0
   default-case: 0
+  no-shadow: 0
 
 env:
   es6: true
