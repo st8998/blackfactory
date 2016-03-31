@@ -37,6 +37,11 @@ export const update = (id, attrs, persist) => dispatch =>
     .then(dispatch.bind(null, update(id, attrs)))) :
     Promise.resolve(dispatch({ type: 'USERS.UPDATE', id, attrs }))
 
+export const remove = (id, persist) => dispatch =>
+  persist ? delay(500).then(() => db.users.delete(id)
+    .then(dispatch.bind(null, remove(id)))) :
+    Promise.resolve(dispatch({ type: 'USERS.REMOVE', id }))
+
 export const createRandom = () => add({
   name: faker.name.findName(),
   jobTitle: faker.name.jobTitle(),

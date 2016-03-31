@@ -7,14 +7,15 @@ import { map, addIndex } from 'ramda'
 import Loader from 'loader/loader'
 import Dropdown from 'dropdown/dropdown'
 
-import { update as updateUser } from 'users/users_actions'
+import { update as updateUser, remove as removeUser } from 'users/users_actions'
 
 @connect(
   null,
   { archiveUser: (id) => updateUser(id, { archived: 1 }, true),
     unArchiveUser: (id) => updateUser(id, { archived: 0 }, true),
     promoteAdmin: (id) => updateUser(id, { admin: 1 }, true),
-    unPromoteAdmin: (id) => updateUser(id, { admin: 0 }, true)
+    unPromoteAdmin: (id) => updateUser(id, { admin: 0 }, true),
+    removeUser: (id) => removeUser(id, true)
   }
 )
 export default class TeamUserActions extends Component {
@@ -26,13 +27,14 @@ export default class TeamUserActions extends Component {
   }
 
   render() {
-    const { user, archiveUser, unArchiveUser, promoteAdmin, unPromoteAdmin } = this.props
+    const { user, archiveUser, unArchiveUser, promoteAdmin, unPromoteAdmin, removeUser } = this.props
     const actionButton = <span className={cn('button button--gear button--borderless team__user-actions',
                                { 'button--loading': this.state.loading })} />
 
     const userActions = []
     if (user.archived) {
       userActions.push(['UnArchive', unArchiveUser.bind(this, user.id)])
+      userActions.push(['Permanently remove', removeUser.bind(this, user.id)])
     } else {
       userActions.push(['Archive', archiveUser.bind(this, user.id)])
       if (user.admin) {

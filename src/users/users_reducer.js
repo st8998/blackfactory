@@ -1,4 +1,4 @@
-import { concat, uniqBy, prop, propEq, merge, sortBy, compose, __ } from 'ramda'
+import { concat, uniqBy, prop, propEq, merge, sortBy, reject, compose, __ } from 'ramda'
 import { adjustBy } from 'ramda_ext'
 
 const normalize = compose(sortBy(prop('id')), uniqBy(prop('id')))
@@ -9,6 +9,8 @@ export default function reducer(state = [], action) {
       return normalize(concat(state, action.user))
     case 'USERS.UPDATE':
       return adjustBy(merge(__, action.attrs), propEq('id', action.id), state)
+    case 'USERS.REMOVE':
+      return reject(propEq('id', action.id), state)
     default:
       return state
   }
