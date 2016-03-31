@@ -451,6 +451,9 @@
   padding: 0;
   margin: -5px 0;
   cursor: pointer;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 14px;
 }
 .team__user-action {
   min-width: 120px;
@@ -478,6 +481,26 @@
 .team tr:hover .team__user-actions {
   visibility: visible;
 }
+
+.team__admin-badge { position: relative; }
+.team__admin-badge::before {
+  content: 'A';
+  display: block;
+  color: #fff;
+  background-color: #fb787b;
+  position: absolute;
+  border-radius: 100%;
+  height: 16px;
+  width: 16px;
+  top: 50%;
+  left: 0;
+  margin: -8px 0 0 -10px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 2px solid #f8f9fa;
+  text-align: center;
+}
+
 .team__skill-list {
   list-style: none;
   padding: 0;

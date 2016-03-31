@@ -53,7 +53,11 @@ const skillList = compose(
 const userRows = map(user => (
   <tr key={user.id}>
     <td />
-    <td><Link to={`/profile/${user.id}`}><Avatar model={user} />{user.name}</Link></td>
+    <td>
+      <Link to={`/profile/${user.id}`}>
+        <span className={cn({ 'team__admin-badge': user.admin })}><Avatar model={user} />{user.name}</span>
+      </Link>
+    </td>
     <td>{user.email}</td>
     <td>{formatPhone(user.phone)}</td>
     <td>{skillList(user.skills || [])}</td>

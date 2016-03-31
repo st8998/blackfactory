@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
 
-import { map } from 'ramda'
+import { map, addIndex } from 'ramda'
 
 import Loader from 'loader/loader'
 import Dropdown from 'dropdown/dropdown'
 
 import { update as updateUser } from 'users/users_actions'
 
-const archiveUser = (id) => updateUser(id, { archived: 1 }, true)
-const unArchiveUser = (id) => updateUser(id, { archived: 0 }, true)
-
 @connect(
   null,
-  { archiveUser, unArchiveUser }
+  { archiveUser: (id) => updateUser(id, { archived: 1 }, true),
+    unArchiveUser: (id) => updateUser(id, { archived: 0 }, true),
+    promoteAdmin: (id) => updateUser(id, { admin: 1 }, true),
+    unPromoteAdmin: (id) => updateUser(id, { admin: 0 }, true)
+  }
 )
 export default class TeamUserActions extends Component {
   state = { loading: false };
@@ -25,7 +26,7 @@ export default class TeamUserActions extends Component {
   }
 
   render() {
-    const { user, archiveUser, unArchiveUser } = this.props
+    const { user, archiveUser, unArchiveUser, promoteAdmin, unPromoteAdmin } = this.props
     const actionButton = <span className={cn('button button--gear button--borderless team__user-actions',
                                { 'button--loading': this.state.loading })} />
 
@@ -34,10 +35,15 @@ export default class TeamUserActions extends Component {
       userActions.push(['UnArchive', unArchiveUser.bind(this, user.id)])
     } else {
       userActions.push(['Archive', archiveUser.bind(this, user.id)])
+      if (user.admin) {
+        userActions.push(['Revoke Admin Rights', unPromoteAdmin.bind(this, user.id)])
+      } else {
+        userActions.push(['Promote to Admin', promoteAdmin.bind(this, user.id)])
+      }
     }
 
-    const actionNodes = map(([title, action]) =>
-      <li className="team__user-action"
+    const actionNodes = addIndex(map)(([title, action], idx) =>
+      <li key={idx} className="team__user-action"
           onClick={this.handleAction.bind(this, action)}>{title}</li>)
 
     return this.state.loading ? <Loader /> :
