@@ -8,5 +8,6 @@
   "requireDotNotation": false,
   "safeContextKeyword": false,
   "requirePaddingNewLinesBeforeLineComments": false,
-  "requirePaddingNewLinesAfterBlocks": false
+  "requirePaddingNewLinesAfterBlocks": false,
+  "disallowMultipleLineBreaks": false
 }

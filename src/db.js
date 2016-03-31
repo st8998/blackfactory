@@ -11,6 +11,15 @@ db.version(2).stores({
   users: '++id, *current, archived, admin, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
 })
 
+db.version(3).stores({
+  roles: '++id, color, name, abbr',
+  users: '++id, *current, archived, admin, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
+}).upgrade(function (trans) {
+  trans.activities.each(function (act, cursor) {
+    db.roles.add(act)
+  })
+})
+
 db.open()
 
 export default db

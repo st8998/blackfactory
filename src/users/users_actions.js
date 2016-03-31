@@ -1,15 +1,10 @@
 import db, { assertFound } from 'db'
 import faker from 'faker'
 
-import { always, times } from 'ramda'
+import { times } from 'ramda'
 
 import delay from 'misc/delay'
-
-function callOnce(onceFunc, alwaysFunc = always()) {
-  let called = 0
-
-  return (...args) => called > 0 ? alwaysFunc() : ++called && onceFunc.apply(null, args)
-}
+import callOnce from 'misc/call_once'
 
 export const add = (user = { }, persist) => dispatch =>
   persist ? db.users.add(user)

@@ -39,6 +39,7 @@ export function Header({ user }) {
         <Link to="/" activeClassName="active" title="Markup Project">Markup Project</Link>
       </h1>
       <ul className="header__menu">
+        <li className="header__menu-item"><Link to="/roles" activeClassName="active">Roles</Link></li>
         <li className="header__menu-item"><Link to="/team" activeClassName="active">Team</Link></li>
       </ul>
       <div className="header__user">

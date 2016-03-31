@@ -1,5 +1,6 @@
 import 'inputs/input_text.css'
 import 'button/button.css'
+import 'bg_colors/bg_colors.css'
 import './main.css'
 
 import React from 'react'
@@ -13,13 +14,21 @@ import thunk from 'redux-thunk'
 
 import usersReducer from 'users/users_reducer'
 import teamReducer from 'users/team/team_reducer'
+import rolesReducer from 'roles/roles_reducer'
 
 import Header from 'header/header'
 import Team from 'users/team'
 import Profile from 'users/profile'
 import ProfileEdit from 'users/profile_edit'
+import Roles from 'roles/roles'
 
-const reducer = combineReducers({ users: usersReducer, routing: routerReducer, team: teamReducer })
+const reducer = combineReducers({
+  users: usersReducer,
+  team: teamReducer,
+  routing: routerReducer,
+  roles: rolesReducer,
+})
+
 const middleware = applyMiddleware(thunk)
 
 const store = createStore(reducer, middleware)
@@ -40,6 +49,7 @@ render((
   <Provider store={ store }>
     <Router history={ history }>
       <Route path="/" component={ App }>
+        <Route path="/roles" component={ Roles }></Route>
         <Route path="/team" component={ Team }></Route>
         <Route path="/profile/:id" component={ Profile }></Route>
         <Route path="/profile/:id/edit" component={ ProfileEdit }></Route>

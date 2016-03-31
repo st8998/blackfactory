@@ -1,11 +1,11 @@
-.activities-tiles {
+.roles-tiles {
   position: relative;
   list-style: none;
   padding: 0;
   margin: -11px -11px;
 }
 
-.activity-tile-container {
+.role-tile-container {
   position: absolute;
   left: 0;
   top: 0;
@@ -15,7 +15,7 @@
   transition: transform .3s;
 }
 
-.activity-tile {
+.role-tile {
   position: relative;
   height: 100%;
   width: 100%;
@@ -27,11 +27,11 @@
   border-radius: 4px;
 }
 
-.activity-tile__color-picker {
+.role-tile__color-picker {
   margin: 57px -3px 47px;
 }
 
-.activity-tile__badge {
+.role-tile__badge {
   position: absolute;
   top: -1px;
   left: 12px;
@@ -46,7 +46,7 @@
   transition: background-color .3s;
 }
 
-.activity-tile__avatar {
+.role-tile__avatar {
   margin: 40px auto 0;
   height: 60px;
   width: 60px;
@@ -56,7 +56,7 @@
   box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.activity-tile__avatar span {
+.role-tile__avatar span {
   color: #fff;
   font-size: 14px;
   text-transform: uppercase;
@@ -64,7 +64,7 @@
   line-height: 60px;
 }
 
-.activity-tile-container:hover .activity-tile__avatar:before {
+.role-tile-container:hover .role-tile__avatar:before {
   content: "";
   display: block;
   background-color: #fff;
@@ -76,7 +76,7 @@
   left: 50%;
   margin-left: -14px;
 }
-.activity-tile__avatar .flipping-card__flip-button {
+.role-tile__avatar .flipping-card__flip-button {
   position: absolute;
   bottom: -12px;
   left: 50%;
@@ -85,21 +85,21 @@
   height: 24px;
   min-width: 24px;
 }
-.activity-tile-container:hover .activity-tile__avatar .flipping-card__flip-button {
+.role-tile-container:hover .role-tile__avatar .flipping-card__flip-button {
   display: inherit;
 }
 
-.activity-tile__remove-button {
+.role-tile__remove-button {
   display: none;
   position: absolute;
   top: 5px;
   right: 5px;
 }
-.activity-tile-container:hover .activity-tile__remove-button {
+.role-tile-container:hover .role-tile__remove-button {
   display: inherit;
 }
 
-.activity-tile__name {
+.role-tile__name {
   display: block;
   width: 100%;
   text-align: center;
@@ -107,7 +107,7 @@
   font-size: 12px;
 }
 
-.activity-tile__abbr {
+.role-tile__abbr {
   display: block;
   width: 70px;
   margin: 0 auto;
@@ -116,7 +116,7 @@
   color: #8896a2;
 }
 
-.activity-tile-container:hover .inline-edit__view::after {
+.role-tile-container:hover .inline-edit__view::after {
   content: "";
   position: absolute;
   border-bottom: 1px dashed #47515c;
@@ -125,11 +125,11 @@
   left: 0;
 }
 
-.activity-tile-container:hover .activity-tile__abbr .inline-edit__view::after {
+.role-tile-container:hover .role-tile__abbr .inline-edit__view::after {
   border-color: #747e8a;
 }
 
-.activity-tile__abbr-hint {
+.role-tile__abbr-hint {
   display: block;
   font-size: 10px;
   color: #a2aab2;
@@ -137,13 +137,13 @@
   margin-top: 5px;
 }
 
-.activity-tile--add-new {
+.role-tile--add-new {
   color: #a2aab2;
   background-color: #f4f4f4;
   cursor: pointer;
 }
 
-.activity-tile__add-new-hint {
+.role-tile__add-new-hint {
   position: absolute;
   top: 50%;
   left: 0;
@@ -155,10 +155,10 @@
   font-weight: 500;
   transition: color .3s;
 }
-.activity-tile:hover .activity-tile__add-new-hint {
+.role-tile:hover .role-tile__add-new-hint {
   color: #747e8a;
 }
-.activity-tile__add-new-hint::before {
+.role-tile__add-new-hint::before {
   content: "";
   display: block;
   height: 53px;
@@ -167,23 +167,59 @@
   background-size: 53px 53px;
   background-repeat: no-repeat;
   background-position: 50% 0;
-  background-image: svg-load('activities/add.svg', stroke: #d1d6da, fill: #d1d6da);
+  background-image: svg-load('roles/add.svg', stroke: #d1d6da, fill: #d1d6da);
   margin-bottom: 20px;
 }
 
 /* ANIMATIONS */
-.activity-tile-container.ng-enter {
+.role-tile-container.ng-enter {
   opacity: 0;
   transition: opacity .3s;
 }
-.activity-tile-container.ng-enter-active {
+.role-tile-container.ng-enter-active {
   opacity: 1;
 }
 
-.activity-tile-container.ng-leave {
+.role-tile-container.ng-leave {
   opacity: 1;
   transition: opacity .2s;
 }
-.activity-tile-container.ng-leave-active {
+.role-tile-container.ng-leave-active {
   opacity: 0;
+}
+
+.flipping-card-container {
+  /*position: relative;*/
+  perspective: 800px;
+}
+
+.flipping-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+}
+
+.flipping-card .flipping-card__front,
+.flipping-card .flipping-card__back {
+  padding: 9px 12px;
+  margin: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flipping-card .flipping-card__front {
+  transform: rotateY(0deg);
+}
+
+.flipping-card .flipping-card__back {
+  transform: rotateY(180deg);
+}
+
+.flipping-card--flipped {
+  transform: rotateY(180deg);
 }

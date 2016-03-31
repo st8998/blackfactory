@@ -18,8 +18,28 @@
   background-repeat: no-repeat;
 }
 
-.loader-appear, .loader-enter { opacity: 0 }
-.loader-appear-active, .loader-enter-active { opacity: 1; transition: opacity .2s }
+.loading::after {
+  content: '';
+  z-index: 1001;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -15px 0 0 -15px;
+  width: 30px;
+  height: 30px;
+  background-image: svg-load('loader/loader.svg', fill: #ccd3d9);
+  background-repeat: no-repeat;
+}
 
-.loader-leave { opacity: 1 }
-.loader-leave-active { opacity: 0; transition: opacity .2s }
+.loading::before {
+  content: '';
+  pointer-events: none;
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, .6);
+}
+
+
+
