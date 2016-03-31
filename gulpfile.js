@@ -47,7 +47,7 @@ gulp.task('slim-watch', ['slim'], function () {
 // WEBPACK CONFIG
 const config = {
   entry: {
-    vendor: ['faker', 'dexie', 'instadate', 'ramda',
+    vendor: ['faker', 'dexie', 'instadate', 'ramda', 'core-decorators',
              'react', 'react-dom', 'react-router', 'react-redux', 'react-mixin',
               'redux', 'reselect', 'react-router-redux',
              'react-addons-css-transition-group', 'classnames'],

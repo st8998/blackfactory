@@ -12,13 +12,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import usersReducer from 'users/users_reducer'
+import teamReducer from 'users/team/team_reducer'
 
 import Header from 'header/header'
 import Team from 'users/team'
 import Profile from 'users/profile'
 import ProfileEdit from 'users/profile_edit'
 
-const reducer = combineReducers({ users: usersReducer, routing: routerReducer })
+const reducer = combineReducers({ users: usersReducer, routing: routerReducer, team: teamReducer })
 const middleware = applyMiddleware(thunk)
 
 const store = createStore(reducer, middleware)

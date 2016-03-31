@@ -8,6 +8,7 @@ import { pick, map, compose, sortBy, reduce, prop, times,
          reverse, addIndex, merge, propEq, filter, reject } from 'ramda'
 
 import { requestAll as requestAllUsers, createRandom as createRandomUser } from 'users/users_actions'
+import { setSort as sortTeam } from './team_actions'
 
 import { format as formatPhone } from 'users/profile/tel_link'
 import { Link } from 'react-router'
@@ -65,7 +66,7 @@ const userRows = map(user => (
   </tr>
 ))
 
-export const Team = function ({ users, loading }) {
+export const Team = function ({ users, loading, setSort, sort }) {
   if (loading) return <div className="centered-container"><Loader /></div>
 
   return (
@@ -73,8 +74,16 @@ export const Team = function ({ users, loading }) {
       <thead className="team-header">
       <tr>
         <th className="team-header__activity">Activity</th>
-        <th className="team-header__name">Name</th>
-        <th className="team-header__email">Email</th>
+        <th className={cn('team-header__name team-header--sortable', {
+                            'team-header--sorted-asc': !sort.reverse && sort.attr === 'name',
+                            'team-header--sorted-desc': sort.reverse && sort.attr === 'name'
+                          })} 
+            onClick={setSort.bind(null, 'name')}>Name</th>
+        <th className={cn('team-header__email team-header--sortable', {
+                            'team-header--sorted-asc': !sort.reverse && sort.attr === 'email',
+                            'team-header--sorted-desc': sort.reverse && sort.attr === 'email'
+                          })} 
+            onClick={setSort.bind(null, 'email')}>Email</th>
         <th className="team-header__phone">Phone</th>
         <th className="team-header__skills">Skills</th>
         <th className="team-header__controll" />
@@ -86,29 +95,34 @@ export const Team = function ({ users, loading }) {
 }
 
 const usersSelector = createSelector(
-  [state => state.users],
-  users => ({
-    active: reject(propEq('archived', 1), users),
-    archive: filter(propEq('archived', 1), users)
-  })
+  [state => state.users, state => state.team.sorting],
+  (users, sorting) => {
+    const sortedUsers = sorting.sorter(users)
+
+    return {
+      sort: pick(['attr', 'reverse'], sorting),
+      active: reject(propEq('archived', 1), sortedUsers),
+      archive: filter(propEq('archived', 1), sortedUsers)
+    }
+  }
 )
 
 @connect(
   usersSelector,
-  { requestAllUsers, createRandomUser }
+  { requestAllUsers, createRandomUser, sortTeam }
 )
 export default class UsersTeam extends Component {
-  state = { loading: false, filter: 'active' };
+  state = { loading: false, filter: 'active', sort: 'id', reverse: false };
 
   componentWillMount() {
-    this.setState(merge(this.state, { loading: true }))
+    this.setState({ loading: true })
     this.props.requestAllUsers()
       .catch(err => console.log(err, err.stack))
-      .then(() => this.setState(merge(this.state, { loading: false })))
+      .then(() => this.setState({ loading: false }))
   }
 
   setFilter(filter) {
-    this.setState(merge(this.state, { filter }))
+    this.setState({ filter })
   }
 
   handleCreateRandomUser(e) {
@@ -118,6 +132,10 @@ export default class UsersTeam extends Component {
     Promise.resolve(this.props.createRandomUser())
       .catch(err => console.log(err, err.stack))
       .then(() => node && node.classList.remove('button--loading'))
+  }
+
+  handleSort(attr) {
+    this.props.sortTeam(attr)
   }
 
   render() {
@@ -134,7 +152,7 @@ export default class UsersTeam extends Component {
           </div>
           <div className="button" onClick={this::this.handleCreateRandomUser}>Add random member</div>
         </HeaderControls>
-        <Team users={this.props[this.state.filter]} loading={this.state.loading} />
+        <Team users={this.props[this.state.filter]} loading={this.state.loading} sort={this.props.sort} setSort={this::this.handleSort} />
       </div>
     )
   }
