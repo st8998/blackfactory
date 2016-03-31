@@ -1,5 +1,8 @@
 import db, { assertFound } from 'db'
-import { always } from 'ramda'
+import faker from 'faker'
+
+import { always, times } from 'ramda'
+
 import delay from 'misc/delay'
 
 function callOnce(onceFunc, alwaysFunc = always()) {
@@ -33,3 +36,18 @@ export const update = (id, attrs, persist) => dispatch =>
   persist ? delay(500).then(() => db.transaction('rw', db.users, () => db.users.update(id, attrs))
     .then(dispatch.bind(null, update(id, attrs)))) :
     Promise.resolve(dispatch({ type: 'USERS.UPDATE', id, attrs }))
+
+export const createRandom = () => add({
+  name: faker.name.findName(),
+  jobTitle: faker.name.jobTitle(),
+  phone: faker.phone.phoneNumber('###########'),
+  email: faker.internet.email(),
+  birthdate: String(faker.date.past()),
+  hobby: faker.lorem.sentence(),
+  skills: times(
+    () => ({ name: faker.name.jobArea(), level: faker.random.number({ min: 1, max: 5 }) }),
+    faker.random.number({ min: 0, max: 5 })
+  ),
+  experience: [{ name: faker.company.companyName(),
+                 from: faker.random.number({ min: 1995, max: 2016 }), to: 'Present' }]
+}, true)

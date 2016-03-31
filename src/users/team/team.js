@@ -7,7 +7,7 @@ import { createSelector } from 'reselect'
 import { pick, map, compose, sortBy, reduce, prop, times,
          reverse, addIndex, merge, propEq, filter, reject } from 'ramda'
 
-import { requestAll as requestAllUsers } from 'users/users_actions'
+import { requestAll as requestAllUsers, createRandom as createRandomUser } from 'users/users_actions'
 
 import { format as formatPhone } from 'users/profile/tel_link'
 import { Link } from 'react-router'
@@ -95,7 +95,7 @@ const usersSelector = createSelector(
 
 @connect(
   usersSelector,
-  { requestAllUsers }
+  { requestAllUsers, createRandomUser }
 )
 export default class UsersTeam extends Component {
   state = { loading: false, filter: 'active' };
@@ -111,6 +111,15 @@ export default class UsersTeam extends Component {
     this.setState(merge(this.state, { filter }))
   }
 
+  handleCreateRandomUser(e) {
+    const node = e.target
+    node.classList.add('button--loading')
+
+    Promise.resolve(this.props.createRandomUser())
+      .catch(err => console.log(err, err.stack))
+      .then(() => node && node.classList.remove('button--loading'))
+  }
+
   render() {
     return (
       <div>
@@ -123,7 +132,7 @@ export default class UsersTeam extends Component {
               {`Archive (${this.props.archive.length})`}
             </span>
           </div>
-          <div className="button">Add random member</div>
+          <div className="button" onClick={this::this.handleCreateRandomUser}>Add random member</div>
         </HeaderControls>
         <Team users={this.props[this.state.filter]} loading={this.state.loading} />
       </div>

@@ -22,7 +22,7 @@ const Info = function ({ birthdate, hobby }) {
   if (!birthdate && !hobby) return <Stub />
 
   const infoNodes = []
-  if (birthdate) infoNodes.push([<dt>date of birth</dt>, <dd>{birthdate}</dd>])
+  if (birthdate) infoNodes.push([<dt>Date of birth</dt>, <dd>{birthdate}</dd>])
   if (hobby) infoNodes.push([<dt>Hobby</dt>, <dd>{hobby}</dd>])
 
   return (
