@@ -25,22 +25,19 @@ export default class RolesCard extends Component {
     )
   }
 
-  @decorate(withLoading())
   handleRemove(action) {
     return this.props.removeRole(this.props.role.id, true)
   }
 
-  @decorate(withLoading())
   handlePickColor(e) {
     if (e.target.type === 'radio') {
       return this.props.updateRole(this.props.role.id, { color: Number(e.target.value) }, true)
     }
   }
 
-  @decorate(withLoading())
   handleUpdate(e) {
     if (this.props.role[e.target.name] != e.target.value) {
-      return this.props.updateRole(this.props.role.id, { [e.target.name]: e.target.value }, true)  
+      return this.props.updateRole(this.props.role.id, { [e.target.name]: e.target.value }, true)
     }
   }
 

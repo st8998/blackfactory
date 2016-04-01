@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { WithFormValue } from 'react-forms'
 import resizeImage from 'misc/resize_image'
 
-import Avatar from 'avatar/avatar'
+import Avatar from 'common/avatar'
 
 class ProfileEditAvatar extends Component {
   render() {
     return (
       <div className="profile-edit__avatar">
-        <Avatar model={{ avatar: this.props.formValue.value }} />
+        <Avatar avatar={this.props.formValue.value} />
         <label className="button button--camera edit-profile__avatar-pick">
           <input type="file" onChange={this.handleImageUpload.bind(this)} />
         </label>

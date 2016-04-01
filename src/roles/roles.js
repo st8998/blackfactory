@@ -1,6 +1,4 @@
 import './roles.css'
-import './color_picker.css'
-import './inline_edit.css'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -11,11 +9,11 @@ import { map, addIndex, forEach } from 'ramda'
 
 import { requestAll as requestAllRoles, add as addRole, remove as removeRole } from './roles_actions'
 
-import snakeFlow from './snake_flow'
-import RolesCard from './roles_card'
-
+import snakeFlow from 'misc/snake_flow'
 import withLoading from 'misc/with_loading'
-import Loader from 'loader/loader'
+import Loader from 'common/loader'
+
+import RolesCard from './roles_card'
 
 const { ceil } = Math
 
@@ -36,7 +34,6 @@ export default class ConnectedRoles extends Component {
     return this.props.requestAllRoles()
   }
 
-  @decorate(withLoading('loadingAdd'))
   handleAdd() {
     return this.props.addRole({}, true)
   }

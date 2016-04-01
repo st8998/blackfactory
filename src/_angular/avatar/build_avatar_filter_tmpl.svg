@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="270" height="270">
-    <path fill-rule="evenodd" fill="{{color}}" d="M0 0h270v270H0V0z"/>
-    <text fill="#f6f7f8" font-family="Helvetica,Arial,sans-serif" font-weight="bold" font-size="120" text-anchor="middle" x="135" y="180">{{abbr}}</text>
-</svg>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { WithFormValue } from 'react-forms'
 import { map, append, reject, identical, addIndex } from 'ramda'
-import cn from 'classnames'
 
 import Input from 'misc/input'
-import DonutChart from 'donut_chart/donut_chart'
+import DonutChart from 'common/donut_chart'
 
 const mapIndexed = addIndex(map)
 
@@ -15,7 +14,7 @@ class ProfileEditSkills extends Component {
         <Input select={[idx, 'name']} type="text" className="input--text input--big profile-edit__skill-name" />
         <Input select={[idx, 'level']} type="number" max="5" min="0" className="input--text input--big profile-edit__skill-value" />
         <DonutChart maxValue={5} value={Number(skill.level)} />
-        <span className="button button--remove" onClick={ this.removeSkill.bind(this, skill) }></span>
+        <span className="button button--remove" onClick={ this.removeSkill.bind(this, skill) } />
       </li>
     ))
 

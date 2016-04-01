@@ -4,8 +4,8 @@ import cn from 'classnames'
 
 import { map, addIndex } from 'ramda'
 
-import Loader from 'loader/loader'
-import Dropdown from 'dropdown/dropdown'
+import Loader from 'common/loader'
+import Dropdown from 'common/dropdown'
 
 import { update as updateUser, remove as removeUser } from 'users/users_actions'
 

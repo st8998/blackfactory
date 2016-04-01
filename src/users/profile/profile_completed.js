@@ -1,5 +1,5 @@
 import React from 'react'
-import DonutChart from 'donut_chart/donut_chart'
+import DonutChart from 'common/donut_chart'
 import { reduce, mapObjIndexed, values } from 'ramda'
 
 const WEIGHTS = {

@@ -1,4 +1,4 @@
-import 'users/users.css'
+import './profile.css'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
@@ -8,15 +8,15 @@ import { find, propEq, map, times, addIndex } from 'ramda'
 import { request as requestUser } from 'users/users_actions'
 
 import { Link } from 'react-router'
-import DonutChart from 'donut_chart/donut_chart'
-import Stub from 'misc/stub'
-import Loader from 'loader/loader'
-import Avatar from 'avatar/avatar'
+import DonutChart from 'common/donut_chart'
+import Stub from 'common/stub'
+import Loader from 'common/loader'
+import Avatar from 'common/avatar'
+import TelLink from 'common/tel_link'
+import SkypeLink from 'common/skype_link'
+import MailtoLink from 'common/mailto_link'
 
 import ProfileCompleted from './profile_completed'
-import TelLink from './tel_link'
-import SkypeLink from './skype_link'
-import MailtoLink from './mailto_link'
 
 const Info = function ({ birthdate, hobby }) {
   if (!birthdate && !hobby) return <Stub />
@@ -83,7 +83,7 @@ const Profile = function ({ user }) {
 
   return (
     <div className="centered-container">
-      <div className="profile__avatar"><Avatar model={user} /></div>
+      <div className="profile__avatar"><Avatar {...user} /></div>
       <div className="profile__info">
         <div className="profile__info-header">
           <h3 className="profile__user-name">

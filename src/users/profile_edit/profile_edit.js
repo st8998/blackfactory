@@ -1,4 +1,4 @@
-import 'users/users.css'
+import './profile_edit.css'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
@@ -7,9 +7,7 @@ import { find, propEq, merge, clone, pick } from 'ramda'
 
 import { request as requestUser, update as updateUser } from 'users/users_actions'
 
-import DonutChart from 'donut_chart/donut_chart'
-import Stub from 'misc/stub'
-import Loader from 'loader/loader'
+import Loader from 'common/loader'
 
 import { Fieldset, createValue, WithFormValue } from 'react-forms'
 

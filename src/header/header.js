@@ -6,9 +6,9 @@ import { find, propEq, assoc, compose, __ } from 'ramda'
 import { createSelector } from 'reselect'
 
 import { requestCurrent as requestCurrentUser } from 'users/users_actions'
-import Transition from 'misc/transition'
-import Loader from 'loader/loader'
-import Avatar from 'avatar/avatar'
+import Transition from 'common/transition'
+import Loader from 'common/loader'
+import Avatar from 'common/avatar'
 
 const currentUserSelector = createSelector(
   [state => state.users],
@@ -29,7 +29,7 @@ export function Header({ user }) {
   const avatar = user ? (
     <Link to={ `/profile/${user.id}` }>
       <Transition transitionName="header__avatar" transitionAppear={true}>
-        <Avatar model={ user } />
+        <Avatar {...user} />
       </Transition>
     </Link>) : <Loader />
 

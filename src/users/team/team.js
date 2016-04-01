@@ -1,4 +1,4 @@
-import 'users/users.css'
+import './team.css'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import cn from 'classnames'
@@ -10,12 +10,13 @@ import { pick, map, compose, sortBy, reduce, prop, times,
 import { requestAll as requestAllUsers, createRandom as createRandomUser } from 'users/users_actions'
 import { setSort as sortTeam } from './team_actions'
 
-import { format as formatPhone } from 'users/profile/tel_link'
 import { Link } from 'react-router'
-import HeaderControls from 'header/header_controls'
-import Loader from 'loader/loader'
-import Avatar from 'avatar/avatar'
-import DonutChart from 'donut_chart/donut_chart'
+
+import { HeaderControls } from 'header'
+import { format as formatPhone } from 'common/tel_link'
+import Loader from 'common/loader'
+import Avatar from 'common/avatar'
+import DonutChart from 'common/donut_chart'
 
 import TeamUserActions from './team_user_actions'
 
@@ -56,7 +57,7 @@ const userRows = map(user => (
     <td />
     <td>
       <Link to={`/profile/${user.id}`}>
-        <span className={cn({ 'team__admin-badge': user.admin })}><Avatar model={user} />{user.name}</span>
+        <span className={cn({ 'team__admin-badge': user.admin })}><Avatar {...user} />{user.name}</span>
       </Link>
     </td>
     <td>{user.email}</td>
@@ -73,16 +74,16 @@ export const Team = function ({ users, loading, setSort, sort }) {
     <table className="team">
       <thead className="team-header">
       <tr>
-        <th className="team-header__activity">Activity</th>
+        <th className="team-header__activity">Role</th>
         <th className={cn('team-header__name team-header--sortable', {
                             'team-header--sorted-asc': !sort.reverse && sort.attr === 'name',
                             'team-header--sorted-desc': sort.reverse && sort.attr === 'name'
-                          })} 
+                          })}
             onClick={setSort.bind(null, 'name')}>Name</th>
         <th className={cn('team-header__email team-header--sortable', {
                             'team-header--sorted-asc': !sort.reverse && sort.attr === 'email',
                             'team-header--sorted-desc': sort.reverse && sort.attr === 'email'
-                          })} 
+                          })}
             onClick={setSort.bind(null, 'email')}>Email</th>
         <th className="team-header__phone">Phone</th>
         <th className="team-header__skills">Skills</th>

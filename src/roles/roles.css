@@ -167,7 +167,7 @@
   background-size: 53px 53px;
   background-repeat: no-repeat;
   background-position: 50% 0;
-  background-image: svg-load('roles/add.svg', stroke: #d1d6da, fill: #d1d6da);
+  background-image: svg-load('images/add.svg', stroke: #d1d6da, fill: #d1d6da);
   margin-bottom: 20px;
 }
 

@@ -1,0 +1,144 @@
+.button {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 24px;
+  height: 26px;
+  min-width: 26px;
+  border: 1px solid #d5dbe2;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;
+  color: #47515c;
+
+  margin: 0;
+  padding: 0 24px;
+
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+
+@define-mixin with-icon {
+  background-position: 10px 6px;
+  padding-left: 32px;
+  background-size: 12px 12px;
+
+  &:empty {
+    vertical-align: middle;
+    background-position: center;
+    padding: 0;
+  }
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, .6);
+}
+
+.button:active, .button--active {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.button.button--borderless {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  opacity: .6;
+}
+.button.button--borderless:hover {
+  opacity: 1;
+}
+
+.button--white:hover {
+  background-color: #fcfcfc;
+}
+
+.button--calendar {
+  @mixin with-icon;
+  background-image: svg-load('images/calendar.svg', fill: #8b95a0);
+}
+
+.button--previous {
+  @mixin with-icon;
+  background-image: svg-load('images/arrow-left.svg', fill: #8b95a0);
+}
+
+.button--next {
+  @mixin with-icon;
+  background-image: svg-load('images/arrow-right.svg', fill: #8b95a0);
+}
+
+.button--pencil {
+  @mixin with-icon;
+  background-image: svg-load('images/pencil.svg', fill: #8b95a0);
+}
+
+.button--eyedropper {
+  @mixin with-icon;
+  background-image: svg-load('images/eyedropper.svg', fill: #a4acb5);
+}
+
+.button--camera {
+  @mixin with-icon;
+  background-image: svg-load('images/camera.svg', fill: #8b95a0);
+}
+.button--gear {
+  @mixin with-icon;
+  background-size: 14px 14px;
+  background-image: svg-load('images/gear.svg', fill: #4d5158);
+}
+
+.button--remove {
+  background-size: 9px 9px;
+  vertical-align: middle;
+  background-position: center;
+  padding: 0;
+
+  background-image: svg-load('images/remove.svg', fill: #46505b);
+
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: none;
+}
+.button--remove:hover {
+  background-image: svg-load('images/remove.svg', fill: #fff);
+  background-color: #ffacac;
+  border: solid 1px #ff7777;
+}
+
+.button--small {
+  font-size: 11px;
+  line-height: 19px;
+  height: 20px;
+  min-width: 20px;
+  background-size: 10px 10px;
+}
+
+.button--loading {
+  background-position: 6px 4px;
+  background-size: 16px 16px;
+
+  background-image: svg-load('common/loader/loader.svg', fill: #ccd3d9);
+}
+
+.button[disabled="disabled"], .button--loading {
+  pointer-events: none;
+  box-shadow: none;
+  background-color: transparent;
+  opacity: 0.7;
+  color: #747e8a;
+}
+
+.button__group .button {
+  border-radius: 0;
+  padding: 0 15px;
+}
+.button__group .button:first-child {
+  border-radius: 20px 0 0 20px;
+  padding-left: 20px;
+}
+.button__group .button:last-child {
+  border-radius: 0 20px 20px 0;
+  padding-right: 20px;
+}
