@@ -106,9 +106,18 @@
   vertical-align: middle;
 }
 
+.profile__user-role {
+  color: #a2aab2;
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  vertical-align: middle;
+}
+
 .profile__button-edit {
   display: inline-block;
-  margin-left: 15px;
+  vertical-align: top;
+  margin: 3px 0 0 15px;
 }
 
 .profile__user-job-title {

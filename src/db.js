@@ -13,7 +13,7 @@ db.version(2).stores({
 
 db.version(3).stores({
   roles: '++id, color, name, abbr',
-  users: '++id, *current, archived, admin, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
+  users: '++id, *current, roleId, archived, admin, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
 }).upgrade(function (trans) {
   trans.activities.each(function (act, cursor) {
     db.roles.add(act)

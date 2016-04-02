@@ -14,6 +14,7 @@ import { Fieldset, createValue, WithFormValue } from 'react-forms'
 import Input from 'misc/input'
 import TextareaField from './textarea_field'
 import TextField from './text_field'
+import SelectRoleField from './select_role_field'
 import ProfileEditAvatar from './profile_edit_avatar'
 import ProfileEditSkills from './profile_edit_skills'
 import ProfileEditExperiences from './profile_edit_experiences'
@@ -36,7 +37,7 @@ export default class UserProfileEdit extends Component {
   }
 
   createFormValue(user) {
-    const formValue = createValue({ value: pick(['avatar', 'hobby', 'birthdate', 'skills', 'experience', 'name', 'jobTitle', 'phone', 'email', 'skype'], user), onChange: this.onChange.bind(this) })
+    const formValue = createValue({ value: pick(['roleId', 'avatar', 'hobby', 'birthdate', 'skills', 'experience', 'name', 'jobTitle', 'phone', 'email', 'skype'], user), onChange: this.onChange.bind(this) })
     this.setState(merge(this.state, { formValue }))
   }
 
@@ -77,15 +78,16 @@ export default class UserProfileEdit extends Component {
       <div className="centered-container" key={user.id}>
         <Fieldset formValue={this.state.formValue}>
           <ProfileEditAvatar select="avatar" className="edit-profile__avatar-pick" />
-  
+
           <div className="profile-edit__form">
             <div className="profile__info-block">
               <dl>
                 <TextField select="name" label="Your Name"></TextField>
                 <TextField select="jobTitle" label="Job Title"></TextField>
+                <SelectRoleField select="roleId" label="Role"></SelectRoleField>
               </dl>
             </div>
-  
+
             <div className="profile__info-block">
               <h4>Contacts</h4>
               <dl>
@@ -94,7 +96,7 @@ export default class UserProfileEdit extends Component {
                 <TextField select="email" label="Email"></TextField>
               </dl>
             </div>
-  
+
             <ProfileEditSkills select="skills" />
 
             <div className="profile__info-block">
@@ -104,12 +106,12 @@ export default class UserProfileEdit extends Component {
                 <TextareaField select="hobby" label="Hobby"></TextareaField>
               </dl>
             </div>
-            
+
             <ProfileEditExperiences select="experience" />
-            
+
             <span className={cn('button edit-profile__save', { 'button--loading': isSaving })} onClick={this.handleUpdate.bind(this)}>SAVE</span>
           </div>
-        </Fieldset>  
+        </Fieldset>
       </div>
     )
   }

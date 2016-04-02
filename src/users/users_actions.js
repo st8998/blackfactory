@@ -1,7 +1,7 @@
 import db, { assertFound } from 'db'
 import faker from 'faker'
 
-import { times } from 'ramda'
+import { times, forEach, map, merge } from 'ramda'
 
 import delay from 'misc/delay'
 import callOnce from 'misc/call_once'

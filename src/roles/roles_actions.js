@@ -12,7 +12,7 @@ export const add = (role = { }, persist) => dispatch =>
 
 export const requestAll = callOnce(
   () => dispatch =>
-    delay(0).then(() => db.roles.toArray().then(roles => dispatch(add(roles)))),
+    delay(500).then(() => db.roles.toArray().then(roles => dispatch(add(roles)))),
   () => dispatch => Promise.resolve(null)
 )
 

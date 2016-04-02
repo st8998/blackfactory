@@ -6,6 +6,9 @@ import cn from 'classnames'
 import { find, propEq, map, times, addIndex } from 'ramda'
 
 import { request as requestUser } from 'users/users_actions'
+import { requestAll as requestAllRoles } from 'roles/roles_actions'
+
+import { userWithRoleSelector } from 'users/users_selectors'
 
 import { Link } from 'react-router'
 import DonutChart from 'common/donut_chart'
@@ -87,7 +90,9 @@ const Profile = function ({ user }) {
       <div className="profile__info">
         <div className="profile__info-header">
           <h3 className="profile__user-name">
-            { user.name }<span className="profile__user-job-title">{user.jobTitle}</span>
+            <span>{ user.name }</span>
+            <span className="profile__user-job-title">{user.jobTitle}</span>
+            { user.roleId ? <span className="profile__user-role">{user.role.name}</span> : null }
           </h3>
           <Link to={`/profile/${user.id}/edit`} className="button button--small profile__button-edit">Edit Profile</Link>
         </div>
@@ -110,8 +115,8 @@ const Profile = function ({ user }) {
 }
 
 @connect(
-  (state, props) => ({ user: find(propEq('id', Number(props.params.id)), state.users) }),
-  { requestUser }
+  userWithRoleSelector,
+  { requestUser, requestAllRoles }
 )
 export default class UserProfile extends Component {
   static contextTypes = {
@@ -119,7 +124,7 @@ export default class UserProfile extends Component {
   };
 
   assertUser(id) {
-    this.props.requestUser(id)
+    Promise.all(this.props.requestUser(id), this.props.requestAllRoles())
       .catch(() => this.context.router.replace('/notfound'))
   }
 

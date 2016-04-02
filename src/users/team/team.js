@@ -5,10 +5,12 @@ import cn from 'classnames'
 import { createSelector } from 'reselect'
 
 import { pick, map, compose, sortBy, reduce, prop, times,
-         reverse, addIndex, merge, propEq, filter, reject } from 'ramda'
+         reverse, addIndex, merge, propEq, filter, reject, toPairs, indexBy } from 'ramda'
 
+import { requestAll as requestAllRoles } from 'roles/roles_actions'
 import { requestAll as requestAllUsers, createRandom as createRandomUser } from 'users/users_actions'
-import { setSort as sortTeam } from './team_actions'
+import { setSort as sortTeam, setGroup as groupTeam } from './team_actions'
+import { sortedGroupedTeamSelector } from './team_selectors'
 
 import { Link } from 'react-router'
 
@@ -52,9 +54,12 @@ const skillList = compose(
   reverse, sortBy(prop('level'))
 )
 
-const userRows = map(user => (
+const userRows = addIndex(map)((user, idx) => (
   <tr key={user.id}>
-    <td />
+    <td>
+      {idx === 0 ? <span className={`team__role-badge bg-color--${user.role.color}`}>{user.role.abbr}</span> : null}
+      <span className="team__role-name">{user.role.name}</span>
+    </td>
     <td>
       <Link to={`/profile/${user.id}`}>
         <span className={cn({ 'team__admin-badge': user.admin })}><Avatar {...user} />{user.name}</span>
@@ -67,14 +72,24 @@ const userRows = map(user => (
   </tr>
 ))
 
-export const Team = function ({ users, loading, setSort, sort }) {
+const roleGroups = compose(map(([roleId, users]) => (
+  <tbody key={roleId || 0} className={cn({ 'team__users-group': roleId !== 'false' })}>
+    {userRows(users)}
+  </tbody>
+)), toPairs)
+
+export const Team = function ({ groups, loading, setSort, sort }) {
   if (loading) return <div className="centered-container"><Loader /></div>
 
   return (
     <table className="team">
       <thead className="team-header">
       <tr>
-        <th className="team-header__activity">Role</th>
+        <th className={cn('team-header__name team-header--sortable', {
+                            'team-header--sorted-asc': !sort.reverse && sort.attr === 'role',
+                            'team-header--sorted-desc': sort.reverse && sort.attr === 'role'
+                          })}
+            onClick={setSort.bind(null, 'role')}>Role</th>
         <th className={cn('team-header__name team-header--sortable', {
                             'team-header--sorted-asc': !sort.reverse && sort.attr === 'name',
                             'team-header--sorted-desc': sort.reverse && sort.attr === 'name'
@@ -90,34 +105,21 @@ export const Team = function ({ users, loading, setSort, sort }) {
         <th className="team-header__controll" />
       </tr>
       </thead>
-      <tbody>{ userRows(users) }</tbody>
+      { roleGroups(groups) }
     </table>
   )
 }
 
-const usersSelector = createSelector(
-  [state => state.users, state => state.team.sorting],
-  (users, sorting) => {
-    const sortedUsers = sorting.sorter(users)
-
-    return {
-      sort: pick(['attr', 'reverse'], sorting),
-      active: reject(propEq('archived', 1), sortedUsers),
-      archive: filter(propEq('archived', 1), sortedUsers)
-    }
-  }
-)
-
 @connect(
-  usersSelector,
-  { requestAllUsers, createRandomUser, sortTeam }
+  sortedGroupedTeamSelector,
+  { requestAllUsers, createRandomUser, sortTeam, groupTeam, requestAllRoles }
 )
 export default class UsersTeam extends Component {
   state = { loading: false, filter: 'active', sort: 'id', reverse: false };
 
   componentWillMount() {
     this.setState({ loading: true })
-    this.props.requestAllUsers()
+    Promise.all([this.props.requestAllUsers(), this.props.requestAllRoles()])
       .catch(err => console.log(err, err.stack))
       .then(() => this.setState({ loading: false }))
   }
@@ -144,16 +146,20 @@ export default class UsersTeam extends Component {
       <div>
         <HeaderControls>
           <div className="team__filters">
+            <label className={cn('team__filter', { 'team__filter--active': this.props.grouping.attr === 'role' })}>
+              <input type="checkbox" checked={this.props.grouping.attr === 'role'} onClick={this.props.groupTeam.bind(null, 'role')} />
+              Group by role
+            </label>
             <span className={cn('team__filter', { 'team__filter--active': this.state.filter === 'active' })}
                   onClick={this.setFilter.bind(this, 'active')}>Active</span>
             <span className={cn('team__filter', { 'team__filter--active': this.state.filter === 'archive' })}
                   onClick={this.setFilter.bind(this, 'archive')}>
-              {`Archive (${this.props.archive.length})`}
+              {`Archive (${this.props.archiveCount})`}
             </span>
           </div>
           <div className="button" onClick={this::this.handleCreateRandomUser}>Add random member</div>
         </HeaderControls>
-        <Team users={this.props[this.state.filter]} loading={this.state.loading} sort={this.props.sort} setSort={this::this.handleSort} />
+        <Team groups={this.props[this.state.filter]} loading={this.state.loading} sort={this.props.sort} setSort={this::this.handleSort} />
       </div>
     )
   }
