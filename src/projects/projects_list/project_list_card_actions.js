@@ -40,13 +40,13 @@ export default class TeamUserActions extends Component {
     }
 
     const actionNodes = addIndex(map)(([title, action], idx) =>
-      <li key={idx} className="project-tile__action"
+      <li key={idx} className="action-list__action"
           onClick={this.handleAction.bind(this, action)}>{title}</li>)
 
     return this.state.loading ? <span className="team__user-actions"><Loader /></span> :
       <span className="project-tile__actions">
         <Dropdown actionButton={actionButton} corner="right">
-          <ul className="project-tile__action-list">
+          <ul className="action-list">
             { actionNodes(projectActions) }
           </ul>
         </Dropdown>

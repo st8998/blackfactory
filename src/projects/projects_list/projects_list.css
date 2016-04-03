@@ -122,28 +122,10 @@
   min-width: 160px;
 }
 
-.project-tile__action-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-size: 12px;
-  line-height: 14px;
-}
-.project-tile__action {
-  min-width: 120px;
-  margin: 0 -10px;
-  padding: 5px 20px;
-}
-.project-tile__action:hover {
-  color: #000;
-  background-color: #f1f4f8;
-}
-
 .project-list__filters {
   display: inline-block;
   font-size: 12px;
+  margin-right: -10px;
 }
 .project-list__filter {
   color: #747e8a;

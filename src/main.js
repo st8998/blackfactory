@@ -4,6 +4,7 @@ import 'common/button.css'
 import 'common/input_text.css'
 import 'common/color_picker.css'
 import 'common/inline_edit.css'
+import 'common/action_list.css'
 
 import React from 'react'
 import { Provider, connect } from 'react-redux'
