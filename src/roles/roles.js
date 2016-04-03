@@ -43,7 +43,7 @@ export default class ConnectedRoles extends Component {
 
     const roles = this.props.roles
 
-    const positions = snakeFlow(250, 4, roles)
+    const positions = snakeFlow(250, 4, 1, roles)
 
     const roleNodes = map(role => <RolesCard key={role.id} role={role} pos={positions[role.id]} />)
 

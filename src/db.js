@@ -20,6 +20,13 @@ db.version(3).stores({
   })
 })
 
+
+db.version(4).stores({
+  roles: '++id, color, name, abbr',
+  users: '++id, *current, roleId, archived, admin, name, avatar, jobTitle, birthdate, hobby, phone, email, skype, skills, experience, socials',
+  projects: '++id, name, avatar, descr, members, archived',
+})
+
 db.open()
 
 export default db

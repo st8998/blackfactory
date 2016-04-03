@@ -1,8 +1,8 @@
 const { floor, random } = Math
 
-export default function flow(step, amount, list) {
+export default function flow(step, amount, skip, list) {
   const limit = step * (amount - 1)
-  let x = step
+  let x = skip * step
   let y = 0
   let toRight = true
   const positions = {}

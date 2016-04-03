@@ -17,6 +17,7 @@ import thunk from 'redux-thunk'
 import usersReducer from 'users/users_reducer'
 import teamReducer from 'users/team/team_reducer'
 import rolesReducer from 'roles/roles_reducer'
+import projectsReducer from 'projects/projects_reducer'
 
 import Header from 'header'
 import Guide from 'guide'
@@ -24,12 +25,14 @@ import Team from 'users/team'
 import Profile from 'users/profile'
 import ProfileEdit from 'users/profile_edit'
 import Roles from 'roles/roles'
+import ProjectList from 'projects/projects_list'
 
 const reducer = combineReducers({
   routing: routerReducer,
   users: usersReducer,
   team: teamReducer,
   roles: rolesReducer,
+  projects: projectsReducer,
 })
 
 const middleware = applyMiddleware(thunk)
@@ -56,6 +59,7 @@ render((
         <Route path="/profile/:id/edit" component={ProfileEdit}></Route>
         <Route path="/roles" component={Roles}></Route>
         <Route path="/team" component={Team}></Route>
+        <Route path="/projects" component={ProjectList}></Route>
         <Route path="/guide" component={Guide}></Route>
         <Route path="/notfound" component={NotFound}></Route>
         <Redirect from="/**" to="/notfound"></Redirect>
