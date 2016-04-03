@@ -79,6 +79,7 @@
 }
 
 .team__user-actions {
+  width: 25px;
   display: inline-block;
   float: right;
 }

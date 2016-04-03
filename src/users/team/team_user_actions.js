@@ -48,7 +48,7 @@ export default class TeamUserActions extends Component {
       <li key={idx} className="team__user-action"
           onClick={this.handleAction.bind(this, action)}>{title}</li>)
 
-    return this.state.loading ? <Loader /> :
+    return this.state.loading ? <span className="team__user-actions"><Loader /></span> :
       <span className="team__user-actions">
         <Dropdown actionButton={actionButton} corner="right">
           <ul className="team__user-action-list">

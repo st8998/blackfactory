@@ -127,3 +127,10 @@
   display: inline-block;
   width: 115px;
 }
+
+.dropdown__action-button {
+  display: block;
+}
+.dropdown__action-button input {
+  cursor: pointer;
+}
