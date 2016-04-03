@@ -92,7 +92,7 @@ const Profile = function ({ user }) {
           <h3 className="profile__user-name">
             <span>{ user.name }</span>
             <span className="profile__user-job-title">{user.jobTitle}</span>
-            { user.roleId ? <span className="profile__user-role">{user.role.name}</span> : null }
+            { user.role ? <span className="profile__user-role">{user.role.name}</span> : null }
           </h3>
           <Link to={`/profile/${user.id}/edit`} className="button button--small profile__button-edit">Edit Profile</Link>
         </div>

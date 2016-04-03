@@ -6,6 +6,7 @@ import cn from 'classnames'
 import { find, propEq, merge, clone, pick } from 'ramda'
 
 import { request as requestUser, update as updateUser } from 'users/users_actions'
+import { userSelector } from 'users/users_selectors'
 
 import Loader from 'common/loader'
 
@@ -21,7 +22,7 @@ import ProfileEditExperiences from './profile_edit_experiences'
 
 
 @connect(
-  (state, props) => ({ user: find(propEq('id', Number(props.params.id)), state.users) }),
+  userSelector,
   { requestUser, updateUser }
 )
 export default class UserProfileEdit extends Component {

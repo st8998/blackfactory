@@ -1,0 +1,41 @@
+.select {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.select__option-container {
+  position: relative;
+}
+
+.select__option-container > label {
+  padding: 5px 20px;
+  cursor: pointer;
+  display: block;
+}
+.select__radio {
+  display: block;
+  position: absolute;
+  left: -9000px;
+}
+
+.select__radio:checked + .select__option {
+  color: #000;
+  position: relative;
+}
+.select__radio:checked + .select__option::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  width: 3px;
+  height: 3px;
+  background: #47515c;
+  border-radius: 50%;
+}
+
+
+.select__option-container:hover {
+  color: #000;
+  background-color: #f1f4f8;
+}

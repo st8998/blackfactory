@@ -4,14 +4,18 @@ import { connect } from 'react-redux'
 import { decorate } from 'core-decorators'
 import randomatic from 'randomatic'
 
-import { map, pick, addIndex } from 'ramda'
+import { map, pick, addIndex, indexBy, prop } from 'ramda'
 
 import { requestAll as requestAllRoles } from 'roles/roles_actions'
+import { rolesWithDefault } from 'roles/roles_selectors'
 
+
+import Dropdown from 'common/dropdown'
+import { Select, Option } from 'common/select'
 import withLoading from 'misc/with_loading'
 
 @connect(
-  state => pick(['roles'], state),
+  rolesWithDefault,
   { requestAllRoles }
 )
 class SelectRoleField extends Component {
@@ -24,27 +28,32 @@ class SelectRoleField extends Component {
 
   render() {
     const id = randomatic(5)
+    const name = randomatic(10)
 
-    const options = map(role => <option value={role.id}>{ `(${role.abbr}) ${role.name}` }</option>)
+    const options = map(role => (
+      <Option key={role.id} checked={role.id === this.props.formValue.value}
+              name={name} value={role.id}>
+        { `(${role.abbr}) ${role.name}` }
+      </Option>
+    ))
+    const rolesDict = indexBy(prop('id'), this.props.roles)
 
-    console.log('USER ROLE', this.props.formValue.value)
-    
     return (
       <div>
         <dt><label htmlFor={id}>{this.props.label}</label></dt>
         <dd>
-          <select id={id} value={this.props.formValue.value} disabled={this.state.loading} onChange={this.onChange.bind(this)}>
-            <option value="">(NA) Not Assigned</option>
-            { options(this.props.roles) }
-          </select>
+          <Dropdown actionButton={ <input className="input--text input--big" disabled="disabled" value={rolesDict[this.props.formValue.value].name} /> }>
+            <Select onChange={this::this.onChange}>
+              { options(this.props.roles) }
+            </Select>
+          </Dropdown>
         </dd>
       </div>
     )
   }
 
   onChange(e) {
-    console.log('SELECTED', Number(e.target.value) || null)
-    this.props.formValue.update(Number(e.target.value) || null)
+    this.props.formValue.update(Number(e.target.value))
   }
 }
 

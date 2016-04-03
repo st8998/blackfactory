@@ -28,7 +28,7 @@ export default class TeamUserActions extends Component {
 
   render() {
     const { user, archiveUser, unArchiveUser, promoteAdmin, unPromoteAdmin, removeUser } = this.props
-    const actionButton = <span className={cn('button button--gear button--borderless team__user-actions',
+    const actionButton = <span className={cn('button button--gear button--borderless',
                                { 'button--loading': this.state.loading })} />
 
     const userActions = []
@@ -49,10 +49,12 @@ export default class TeamUserActions extends Component {
           onClick={this.handleAction.bind(this, action)}>{title}</li>)
 
     return this.state.loading ? <Loader /> :
-      <Dropdown actionButton={actionButton}>
-        <ul className="team__user-action-list">
-          { actionNodes(userActions) }
-        </ul>
-      </Dropdown>
+      <span className="team__user-actions">
+        <Dropdown actionButton={actionButton} corner="right">
+          <ul className="team__user-action-list">
+            { actionNodes(userActions) }
+          </ul>
+        </Dropdown>
+      </span>
   }
 }

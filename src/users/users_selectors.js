@@ -12,7 +12,7 @@ export const usersWithRolesSelector = createSelector(
 
 export const userSelector = createSelector(
   [state => state.users, (state, props) => Number(props.params.id)],
-  ({ users }, id) => ({ user: find(propEq('id', id), users) })
+  (users, id) => ({ user: find(propEq('id', id), users) })
 )
 
 export const userWithRoleSelector = createSelector(

@@ -19,6 +19,7 @@ import teamReducer from 'users/team/team_reducer'
 import rolesReducer from 'roles/roles_reducer'
 
 import Header from 'header'
+import Guide from 'guide'
 import Team from 'users/team'
 import Profile from 'users/profile'
 import ProfileEdit from 'users/profile_edit'
@@ -55,6 +56,7 @@ render((
         <Route path="/profile/:id/edit" component={ProfileEdit}></Route>
         <Route path="/roles" component={Roles}></Route>
         <Route path="/team" component={Team}></Route>
+        <Route path="/guide" component={Guide}></Route>
         <Route path="/notfound" component={NotFound}></Route>
         <Redirect from="/**" to="/notfound"></Redirect>
       </Route>
